@@ -1,7 +1,21 @@
-runtime: python310
+runtime: python39  # Use the appropriate Python version
+entrypoint: gunicorn -b :$PORT app:server  # Gunicorn is recommended for production
+
+# Instance settings
+instance_class: F2  # Adjust based on your needs (F1, F2, etc.)
+
+# Automatic scaling settings
 automatic_scaling:
-  target_cpu_utilization: 0.90
-  max_instances: 1
-entrypoint: gunicorn -b :8080 app4:server
+  target_cpu_utilization: 0.65
+  min_instances: 1
+  max_instances: 5
+
+# Environment variables (set your GCS bucket name)
 env_variables:
-  BUCKET_NAME: 'cs163-senior-project.appspot.com'
+  BUCKET_NAME: "your-gcs-bucket-name"
+
+# Required files for dependencies
+handlers:
+- url: /.*
+  script: auto
+  secure: always

@@ -12,10 +12,6 @@ automatic_scaling:
 
 # Environment variables (set your GCS bucket name)
 env_variables:
-  BUCKET_NAME: "your-gcs-bucket-name"
+  BUCKET_NAME: " cs163-senior-project.appspot.com"
 
-# Required files for dependencies
-handlers:
-- url: /.*
-  script: auto
-  secure: always
+

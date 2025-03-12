@@ -42,7 +42,7 @@ server = app.server
 
 # Cloud Storage demo
 BUCKET_NAME = os.environ.get("BUCKET_NAME")
-df2 = get_csv_from_gcs(BUCKET_NAME, 'customers-100-simple.csv')
+#df2 = get_csv_from_gcs(BUCKET_NAME, 'customers-100-simple.csv')
 
 # App layout
 app.layout = html.Div([

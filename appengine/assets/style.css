@@ -1,0 +1,66 @@
+/* General page styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #111827;
+    margin: 0;
+    padding: 0;
+}
+
+/* Links */
+a:hover {
+    text-decoration: underline;
+    background-color: #2563eb;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+/* Navbar */
+nav {
+    background-color: #1e293b;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav div {
+    display: flex;
+    align-items: center;
+}
+
+/* Headings */
+h1 {
+    color: #fbbf24;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Content Styling */
+div.page-container {
+    padding: 40px;
+    color: #cbd5e0;
+}
+
+div.page-container h1 {
+    margin-bottom: 20px;
+}
+
+/* Buttons */
+button {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+button:hover {
+    background-color: #1d4ed8;
+}

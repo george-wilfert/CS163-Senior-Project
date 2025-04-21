@@ -18,29 +18,17 @@ layout = html.Div([
         'textAlign': 'center',
         'boxShadow': '0 4px 20px rgba(0,0,0,0.3)'
     }),
-
-    # Content
-    html.Div([
-        html.H2("Core Approaches", style={'color': '#34d399', 'textAlign': 'center'}),
-        html.Ul([
-            html.Li("Geospatial Analysis using GIS data"),
-            html.Li("Machine Learning models to predict usage trends"),
-            html.Li("Clustering techniques for region segmentation"),
-            html.Li("Time-series forecasting for demand planning"),
-        ], style={
-            'color': '#e5e7eb',
-            'fontSize': '1.1rem',
-            'lineHeight': '1.8',
-            'maxWidth': '800px',
-            'margin': '40px auto'
-        })
-    ], style={'padding': '40px 20px', 'backgroundColor': '#111827'}),
-
-    html.Div([
-        html.H2("Tools We Use", style={'color': '#fbbf24', 'textAlign': 'center'}),
+        html.Div([
+        html.H2("Enegry Infastrucutre", style={'color': '#fbbf24', 'textAlign': 'center'}),
         html.P(
-            "Our methods combine statistical rigor and modern computational tools such as Python, pandas, scikit-learn, TensorFlow, and PostgreSQL to power our dashboards and predictions.",
-            style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
+            "",style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
+        )
+        
+    ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
+    html.Div([
+        html.H2("Transportation Infastrucuture", style={'color': '#fbbf24', 'textAlign': 'center'}),
+        html.P(
+            "",style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
         )
     ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'})
 ])

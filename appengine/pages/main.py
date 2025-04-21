@@ -6,7 +6,7 @@ register_page(__name__, path='/')
 layout = html.Div([
     # Hero Banner Section
     html.Div([
-        html.H1("Welcome to InfraPortal", style={
+        html.H1("Welcome to Our Infastructure Anyalsis", style={
             'fontSize': '4rem',
             'color': '#38bdf8',
             'marginBottom': '20px'
@@ -17,15 +17,7 @@ layout = html.Div([
                    'color': '#cbd5e0',
                    'marginBottom': '40px'
                }),
-        html.Button("Explore Now", style={
-            'padding': '16px 30px',
-            'fontSize': '1.2rem',
-            'color': 'white',
-            'backgroundColor': '#2563eb',
-            'border': 'none',
-            'borderRadius': '8px',
-            'cursor': 'pointer'
-        })
+        
     ], style={
         'background': 'linear-gradient(135deg, #1e293b, #0f172a)',
         'padding': '150px 20px',
@@ -59,7 +51,7 @@ layout = html.Div([
             'textAlign': 'center'
         }),
         html.Div([
-            html.H2("In-Depth Analysis", style={'color': '#fbbf24'}),
+            html.H2("Expanded Effects of Infastructure", style={'color': '#fbbf24'}),
             html.P("Comprehensive reports and data analysis to guide policy and investment decisions.",
                    style={'color': '#cbd5e0'})
         ], style={

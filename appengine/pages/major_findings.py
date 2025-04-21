@@ -35,9 +35,17 @@ layout = html.Div([
     ], style={'padding': '40px 20px', 'backgroundColor': '#111827'}),
 
     html.Div([
-        html.H2("Data-Driven Evidence", style={'color': '#34d399', 'textAlign': 'center'}),
+        html.H2("Our Hypthoesises Answered", style={'color': '#34d399', 'textAlign': 'center'}),
         html.P(
-            "Our findings are supported by a combination of federal, state, and local infrastructure data sources, with statistical models ensuring reliability and consistency.",
+            "",
+            style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
+        )
+    ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
+
+    html.Div([
+        html.H2("How Our Project Can be Used", style={'color': '#34d399', 'textAlign': 'center'}),
+        html.P(
+            "",
             style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
         )
     ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'})

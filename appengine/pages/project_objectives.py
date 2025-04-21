@@ -10,7 +10,7 @@ layout = html.Div([
             'color': '#38bdf8',
             'marginBottom': '20px'
         }),
-        html.P("Our long-term infrastructure vision and strategic direction.",
+        html.P("A look into our domestic infastructure and its corresponding results",
                style={'fontSize': '1.3rem', 'color': '#cbd5e0'}),
     ], style={
         'background': 'linear-gradient(to right, #0f172a, #1e293b)',
@@ -20,12 +20,13 @@ layout = html.Div([
     }),
 
     html.Div([
-        html.H2("Strategic Goals", style={'color': '#34d399', 'textAlign': 'center'}),
+        html.H2("About our Project", style={'color': '#34d399', 'textAlign': 'center'}),
+        html.P(
+            "Our goal is to develop a structured methodology to assess infrastructure impacts by analyzing the interconnected economic, environmental, social, and logistical factors that shape large-scale projects. Through data-driven analysis, we aim to provide insights into how infrastructure can be designed and implemented more effectively, optimizing for long-term sustainability, efficiency, and maximum public benefit.", 
+            style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
+        ),
         html.Ul([
-            html.Li("Expand sustainable energy infrastructure by 2035"),
-            html.Li("Modernize national transportation systems"),
-            html.Li("Improve access and equity across regions"),
-            html.Li("Leverage data to guide smart development"),
+            html.Li("We split our project into two main parts one looking at the core of our energy infastructure and the other diving deeper into transportation infastruture"),
         ], style={
             'color': '#e5e7eb',
             'fontSize': '1.1rem',
@@ -34,12 +35,32 @@ layout = html.Div([
             'margin': '40px auto'
         })
     ], style={'padding': '40px 20px', 'backgroundColor': '#111827'}),
+    html.Div([
+        html.H2("Our Hypothesises", style={'color': '#34d399', 'textAlign': 'center'}),
+        html.P(
+              "Hypothesis 1: Higher infrastructure investment will correlate with increased economic growth, measured by several economic factors like GDP, employment rate, and productivity improvements.",style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
+        ),
+        html.P(),
+
+        html.P(
+              "Hypothesis 2:  Infrastructure costs will be more expensive in urban areas due to several factors, such as acquiring land permits, acquisition fees, and of course, labor fees. Rural areas will likely have a higher cost of transportation due to the distance traveled for material shipment.",style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
+        )
+        
+    ], style={'padding': '40px 20px', 'backgroundColor': '#111827'}),
+    
 
     html.Div([
-        html.H2("How We Get There", style={'color': '#fbbf24', 'textAlign': 'center'}),
+        html.H2("Enegry Infastrucutre", style={'color': '#fbbf24', 'textAlign': 'center'}),
         html.P(
-            "We aim to collaborate with agencies, leverage real-time data analytics, and drive innovation in infrastructure planning and deployment. Our strategy is forward-thinking and inclusive, prioritizing environmental stewardship and technological resilience.",
-            style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
+            "",style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
+        )
+        
+    ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
+    html.Div([
+        html.H2("Transportation Infastrucuture", style={'color': '#fbbf24', 'textAlign': 'center'}),
+        html.P(
+            "",style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
         )
     ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'})
+    
 ])

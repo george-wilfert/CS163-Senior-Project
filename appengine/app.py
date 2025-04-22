@@ -1,6 +1,7 @@
 from dash import Dash, html, dcc, page_container
 
 app = Dash(__name__, use_pages=True, suppress_callback_exceptions=True)
+
 server = app.server
 
 app.layout = html.Div([
@@ -30,3 +31,6 @@ app.layout = html.Div([
     # Page Container
     html.Div(page_container, style={'padding': '40px', 'backgroundColor': '#111827'})
 ])
+
+if __name__ == '__main__':
+    app.run(debug=True)

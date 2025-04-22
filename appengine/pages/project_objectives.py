@@ -52,8 +52,35 @@ layout = html.Div([
     html.Div([
         html.H2("Enegry Infastrucutre", style={'color': '#fbbf24', 'textAlign': 'center'}),
         html.P(
-            "",style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
-        )
+            "Energy plays such a crucial role in every aspect of infrastructure. When looking from a top down level there is energy in everything we do. Infrastructure in a large sense is reliant on energy so diving deeper into a region's energy charastics gives us the ability to explore inferences on not only their infrastructure as a whole but also the impacts of the infrastructure such as GDP, employment, and urbanization. When you think of highly urbanized areas with highly developed infrastructure there is a large amount of energy required to fulfill demands of whether that be manufacturing or everyday use of lights in school buildings. Using an API from the Energy Information Administration we can collect all types of data from states over years to inference about. Below is an example using the API which gives us data about the electricity per state consumed.",style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
+        ),
+        html.Img(
+                src="https://storage.googleapis.com/databucket_seniorproj/EDA_Graphs/choropleth_map.png",
+                style={
+                    "width": "60%",          
+                    "maxWidth": "600px",     
+                    "display": "block",      
+                    "margin": "auto",        
+                    "border": "1px solid #ccc",
+                    "padding": "10px",
+                    "boxShadow": "0 4px 8px rgba(0,0,0,0.1)"
+                }
+            ),
+            html.Img(
+                src="https://storage.googleapis.com/databucket_seniorproj/EDA_Graphs/barplot2022.png",
+                style={
+                    "width": "60%",          
+                    "maxWidth": "600px",     
+                    "display": "block",      
+                    "margin": "auto",        
+                    "border": "1px solid #ccc",
+                    "padding": "10px",
+                    "boxShadow": "0 4px 8px rgba(0,0,0,0.1)"
+                }
+            ),
+        html.P(
+            "Our analysis on energy looks at the impacts on energy categories, such as natural gas, coal, and electricity. Using these categories we can cluster each state into similar groups which can further help our analysis. Some examples of some of the data points we collected are “Natural Gas Used by The Electrical Grid” and “Natural Gas Pipeline and Distribution Use”. This can help answer hypothesis 1 by correlating factors like GDP, urbanization, and productivity to our clusters. Using our clusters we can see which features are important to determining the previously mentioned factors. Using randomforestregressor models we can see correlation and feature importance.  From a sourcing standpoint, being able to tell similarities is important because we can see where other states are similar conditions which can be used to source projects based on key features. Also looking at the change over years gives an important variable that helps predict future costs and thus future effects on our hypothesis 1 factors. For hypothesis 2 we did a regression analysis on expenditures and used urbanization as a feature along with the hidden states in our clusters containing information about it to see how that urbanization plays a role in infrastructure,",style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
+        ),
         
     ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
     html.Div([

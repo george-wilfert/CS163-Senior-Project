@@ -84,7 +84,32 @@ layout = html.Div([
     html.Div([
         html.H2("Transportation Infrastructure", style={'color': '#fbbf24', 'textAlign': 'center'}),
         html.P("Coming soon...", style={'color': '#cbd5e0', 'textAlign': 'center'})
-    ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'})
+    ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
+    
+    html.Div([
+    html.H2("Spending Cluster Analysis", style={'color': '#fbbf24', 'textAlign': 'center'}),
+
+    html.P(
+        "To analyze patterns in highway construction cost changes and their relationship with macroeconomic factors, we applied K-Means clustering on quarterly NHCCI data. Each data point was represented by a feature set that included percentage changes in construction components (e.g., asphalt, grading, bridge), as well as key economic indicators such as GDP, unemployment rate (UNRATE), PPI (PPIACO), and construction employment.",
+        style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
+    ),
+
+    html.P(
+        "Data preprocessing included handling missing values and standardizing the selected features using `StandardScaler` to ensure fair distance-based clustering. K-Means with two clusters (k=2) was chosen based on interpretability, capturing distinct 'High Investment' and 'Low Investment' spending periods across quarters.",
+        style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '20px auto'}
+    ),
+
+    html.P(
+        "We assigned each quarter to a cluster and examined differences in NHCCI trends and construction cost components. To further understand the characteristics of each cluster, we visualized their centers (in original and normalized economic scale) and identified the top ten construction components that showed the greatest variance across clusters.",
+        style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '20px auto'}
+    ),
+
+    html.P(
+        "References: Jain & Dubes (1988), 'Algorithms for Clustering Data'; Han et al. (2011), 'Data Mining: Concepts and Techniques'; Scikit-learn Documentation on KMeans Clustering.",
+        style={'color': '#9ca3af', 'fontSize': '0.95rem', 'fontStyle': 'italic', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '20px auto'}
+    )
+], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
+
 ])
 
 # Combined callback for both year range and buttons

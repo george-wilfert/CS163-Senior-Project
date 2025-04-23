@@ -54,6 +54,31 @@ layout = html.Div([
         dcc.Store(id='image-list', data=load_images([2000, 2005]))
 
     ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
+    
+    # Highway Infrastructure Section
+    html.Div([
+        html.H2("Highway Infrastructure", style={'color': '#fbbf24', 'textAlign': 'center'}),
+    
+        html.P(
+            "To better understand construction cost trends in highway infrastructure, we utilized a Seasonal AutoRegressive Integrated Moving Average with eXogenous factors (SARIMAX) model on the National Highway Construction Cost Index (NHCCI).",
+            style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
+        ),
+    
+        html.P(
+            "The SARIMA model was selected for its ability to capture temporal autocorrelation, seasonality (quarterly), and the influence of external economic variables like GDP and total construction spending. Prior to modeling, we conducted stationarity testing using the Augmented Dickey-Fuller (ADF) test, applied first-order differencing, and validated the stationarity of the transformed series.",
+            style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '20px auto'}
+        ),
+    
+        html.P(
+            "Model diagnostics included visualization of residuals, forecasting with confidence intervals, and evaluation using RMSE (Root Mean Squared Error). ACF and PACF plots were used to guide the selection of model parameters, while standardization of exogenous variables helped ensure stability in parameter estimation. The model showed strong fit characteristics, capturing the seasonal patterns and general trend in NHCCI.",
+            style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '20px auto'}
+        ),
+    
+        html.P(
+            "References: Box & Jenkins (1970), 'Time Series Analysis: Forecasting and Control'; Hyndman & Athanasopoulos (2018), 'Forecasting: Principles and Practice'.",
+            style={'color': '#9ca3af', 'fontSize': '0.95rem', 'fontStyle': 'italic', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '20px auto'}
+        )
+    ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
 
     # Transportation Infrastructure Section (Placeholder)
     html.Div([

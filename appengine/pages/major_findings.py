@@ -9,8 +9,22 @@ layout = html.Div([
             'color': '#38bdf8',
             'marginBottom': '20px'
         }),
-        html.P("Key insights and takeaways from our infrastructure analysis.",
+        html.P("Using the SARIMA model on the NHCCI dataset, we observed a sharp increase in highway construction costs post-2020, indicating sustained demand and inflationary effects in infrastructure investment. The model confirmed strong seasonality, reliable parameter selection, and an overall good fit with low RMSE and unbiased residuals. These findings validate our hypothesis that temporal trends can accurately model highway cost behavior, providing meaningful guidance for future financial planning and policy decisions.",
                style={'fontSize': '1.3rem', 'color': '#cbd5e0'}),
+        html.P("Model Performance Highlights:", style={'fontSize': '1.2rem', 'color': '#fbbf24', 'marginTop': '20px'}),
+        html.Ul([
+            html.Li("The Augmented Dickey-Fuller test revealed the original series was non-stationary (p = 0.9571), but first-order differencing successfully stabilized it (p = 0.0002)."),
+            html.Li("The model’s parameters were selected using ACF and PACF plots, which showed significant lag structure at 1 and 2."),
+            html.Li("SARIMA forecasting showed good alignment with actual values, with RMSE = 0.2098, confirming a strong model fit."),
+            html.Li("The forecast captures seasonal increases and was bounded within reasonable 95% confidence intervals."),
+            html.Li("Residuals show low bias and relatively small variance, supporting that the model generalized well.")
+        ], style={
+            'color': '#e5e7eb',
+            'fontSize': '1.1rem',
+            'lineHeight': '1.8',
+            'maxWidth': '900px',
+            'margin': '20px auto'
+        }),
     ], style={
         'background': 'linear-gradient(to right, #1e3a8a, #0f172a)',
         'padding': '100px 20px',
@@ -19,27 +33,31 @@ layout = html.Div([
     }),
 
     html.Div([
-        html.H2("Highlights", style={'color': '#fbbf24', 'textAlign': 'center'}),
-        html.Ul([
-            html.Li("Aging infrastructure in densely populated regions requires urgent upgrades."),
-            html.Li("Energy grid capacity is nearing peak load limits in 30% of states."),
-            html.Li("Urban transit systems show strong correlations with income mobility."),
-            html.Li("Renewable energy sources are underutilized despite geographic potential."),
-        ], style={
-            'color': '#e5e7eb',
-            'fontSize': '1.1rem',
-            'lineHeight': '1.8',
-            'maxWidth': '800px',
-            'margin': '40px auto'
-        }),
-    ], style={'padding': '40px 20px', 'backgroundColor': '#111827'}),
+        html.H3("Key Visualizations", style={'color': '#fbbf24', 'textAlign': 'center'}),
 
-    html.Div([
-        html.H2("Our Hypthoesises Answered", style={'color': '#34d399', 'textAlign': 'center'}),
-        html.P(
-            "",
-            style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
-        )
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_simple_cost_over_time.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+        html.P("Figure 1: NHCCI Seasonally Adjusted Value Over Time", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("This plot reveals a noticeable acceleration in highway construction costs post-2020, suggesting inflationary pressures or increased infrastructure investments during the recovery phase after COVID-19.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_stationary_differenced.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+        html.P("Figure 2: Differenced NHCCI Series (Stationarity Confirmed)", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("Differencing the series confirmed statistical stationarity, allowing reliable SARIMA modeling by neutralizing trend and variance drift.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_ACF_PACF.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+        html.P("Figure 3: ACF and PACF Plots to Guide Parameter Selection", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("These plots were used to identify suitable SARIMA parameters, revealing a strong autocorrelation at lag 1 and partial autocorrelation at lag 2.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_price_forecast_CI.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+        html.P("Figure 4: SARIMA Forecast with 95% Confidence Interval", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("The SARIMA model accurately captures future increases with tight forecast bounds. This supports its reliability for infrastructure cost projections.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_forecast_residuals_SARIMA.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+        html.P("Figure 5: Forecast Residuals – Actual vs. Predicted NHCCI", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("Residuals fluctuate around zero, indicating low bias. The pattern also lacks severe autocorrelation, confirming a good model fit.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_price_forecast.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+        html.P("Figure 6: Train, Test, and Forecasted NHCCI", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("The visual split of training/testing shows SARIMA adapting to changing trends, particularly the steep climb from 2020–2024.", style={'textAlign': 'center', 'color': '#94a3b8'})
     ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
 
     html.Div([

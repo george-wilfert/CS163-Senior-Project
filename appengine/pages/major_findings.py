@@ -56,9 +56,9 @@ layout = html.Div([
         html.P("Figure 5: Forecast Residuals – Actual vs. Predicted NHCCI", style={'textAlign': 'center', 'color': '#cbd5e0'}),
         html.P("Residuals fluctuate around zero, indicating low bias. The pattern also lacks severe autocorrelation, confirming a good model fit.", style={'textAlign': 'center', 'color': '#94a3b8'}),
 
-        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_price_forecast.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
-        html.P("Figure 6: Train, Test, and Forecasted NHCCI", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("The visual split of training/testing shows SARIMA adapting to changing trends, particularly the steep climb from 2020–2024.", style={'textAlign': 'center', 'color': '#94a3b8'})
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_extended_forecast.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+        html.P("Figure 6: Forecasted NHCCI Using Recent Trends", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("Show a steady increse from 2024-2027, expecting to increse to a value > 3.5 in 2027", style={'textAlign': 'center', 'color': '#94a3b8'})
     ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
 
     html.Div([

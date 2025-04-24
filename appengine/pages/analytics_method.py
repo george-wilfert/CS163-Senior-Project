@@ -107,9 +107,18 @@ layout = html.Div([
     html.P(
         "References: Jain & Dubes (1988), 'Algorithms for Clustering Data'; Han et al. (2011), 'Data Mining: Concepts and Techniques'; Scikit-learn Documentation on KMeans Clustering.",
         style={'color': '#9ca3af', 'fontSize': '0.95rem', 'fontStyle': 'italic', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '20px auto'}
-    )
+    ),
+    
+    html.Div([
+        html.H2("Multivariate Regression with Lasso Regularization", style={'color': '#fbbf24', 'textAlign': 'center'}),
+        html.P("To isolate the most impactful macroeconomic predictors for NHCCI changes, we implemented a multivariate regression model using LassoCV (L1 regularization). The Lasso method is well-suited for high-dimensional data, promoting sparse solutions by shrinking less relevant coefficients to zero.", style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}),
+        html.P("We focused on lagged versions of PPI (PPIACO) and Total Construction Spending (TTLCONS) as inputs to align with our hypothesis that prior economic activity forecasts construction cost trends. The model employed time-aware cross-validation (TimeSeriesSplit) and `StandardScaler` normalization to ensure compatibility with the penalty function.", style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '20px auto'}),
+        html.P("The model returned optimal alpha selection using cross-validation, reported out-of-sample R² for test set accuracy, and allowed for visualization of retained macroeconomic variables. Selected variables were validated using a correlation matrix and interpretation of the Lasso coefficients.", style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '20px auto'}),
+        html.P("References: Tibshirani (1996), 'Regression Shrinkage and Selection via the Lasso'; Hastie, Tibshirani, Friedman (2009), 'The Elements of Statistical Learning'; Scikit-learn LassoCV Documentation.", style={'color': '#9ca3af', 'fontSize': '0.95rem', 'fontStyle': 'italic', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '20px auto'})
+    ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'})
+    
 ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
-
+    
 ])
 
 # Combined callback for both year range and buttons

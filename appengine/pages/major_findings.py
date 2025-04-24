@@ -1,6 +1,144 @@
-from dash import register_page, html
+from dash import register_page, html, dcc
+import plotly.express as px
+import plotly.graph_objects as go
+import pandas as pd
 
 register_page(__name__, path="/findings", name="Major Findings")
+
+# Load SARIMA interactive data
+plot_df = pd.read_csv("https://storage.googleapis.com/databucket_seniorproj/NHCCI%20Data/nhcci_SARIMA_plot_df.csv")
+residuals_df = pd.read_csv("https://storage.googleapis.com/databucket_seniorproj/NHCCI%20Data/nhcci_SARIMA_residuals.csv")
+train_df = pd.read_csv("https://storage.googleapis.com/databucket_seniorproj/NHCCI%20Data/nhcci_SARIMA_train.csv")
+test_df = pd.read_csv("https://storage.googleapis.com/databucket_seniorproj/NHCCI%20Data/nhcci_SARIMA_test.csv")
+forecast_df = pd.read_csv("https://storage.googleapis.com/databucket_seniorproj/NHCCI%20Data/nhcci_SARIMA_forecast_plot.csv")
+cluster_line_df = pd.read_csv("https://storage.googleapis.com/databucket_seniorproj/NHCCI%20Data/nhcci_cluster_input.csv")
+normalized_df = pd.read_csv("https://storage.googleapis.com/databucket_seniorproj/NHCCI%20Data/nhcci_norm_cluster_centers.csv", index_col=0)
+lasso_df = pd.read_csv("https://storage.googleapis.com/databucket_seniorproj/NHCCI%20Data/nhcci_LASSO_plot_df.csv")
+
+# Convert datetime fields
+# plot_df["datetime"] = pd.to_datetime(plot_df["datetime"])
+# residuals_df["datetime"] = pd.to_datetime(residuals_df["datetime"])
+# train_df["datetime"] = pd.to_datetime(train_df["datetime"])
+# test_df["datetime"] = pd.to_datetime(test_df["datetime"])
+
+# Create SARIMA forecast vs actual
+forecast_upper = forecast_df["Forecast"] + 1.96 * residuals_df["residuals"].std()
+forecast_lower = forecast_df["Forecast"] - 1.96 * residuals_df["residuals"].std()
+
+fig_forecast = go.Figure()
+
+fig_forecast.add_trace(go.Scatter(
+    x=train_df["datetime"],
+    y=train_df["NHCCI-Seasonally-Adjusted"],
+    mode="lines",
+    name="Train",
+    line=dict(color="black")
+))
+
+fig_forecast.add_trace(go.Scatter(
+    x=test_df["datetime"],
+    y=test_df["NHCCI-Seasonally-Adjusted"],
+    mode="lines",
+    name="Actual (Test)",
+    line=dict(color="green")
+))
+
+fig_forecast.add_trace(go.Scatter(
+    x=test_df["datetime"],
+    y=forecast_df["Forecast"],
+    mode="lines",
+    name="Forecast",
+    line=dict(color="orange")
+))
+
+# Add confidence interval (shaded area)
+fig_forecast.add_trace(go.Scatter(
+    x=test_df["datetime"],
+    y=forecast_upper,
+    line=dict(color='orange', width=0),
+    showlegend=False,
+    name='Upper Bound'
+))
+fig_forecast.add_trace(go.Scatter(
+    x=test_df["datetime"],
+    y=forecast_lower,
+    fill='tonexty',
+    fillcolor='rgba(255,165,0,0.3)',
+    line=dict(color='orange', width=0),
+    name='95% Confidence Interval'
+))
+
+fig_forecast.update_layout(
+    title="SARIMA Forecast vs Actual NHCCI Values",
+    title_x=0.5,
+    xaxis_title="Date",
+    yaxis_title="NHCCI Seasonally Adjusted Value",
+    legend_title_text='',
+    xaxis=dict(tickangle=45)
+)
+
+# Create SARIMA residuals plot
+fig_residuals = px.line(
+    residuals_df,
+    x="datetime",
+    y="residuals",
+    title="SARIMA Forecast Residuals Over Time"
+)
+fig_residuals.add_hline(y=0, line_dash="dash", line_color="black")
+fig_residuals.update_layout(title_x=0.5)
+
+# Major Findings #2, Plot 3 - NHCCI over Time by Investment Cluster
+fig_kmeans_line = px.line(
+    cluster_line_df,
+    x="datetime",
+    y="NHCCI-Seasonally-Adjusted",
+    color="Spending Cluster Label",
+    title="NHCCI Over Time by Investment Cluster",
+    labels={"datetime": "Year", "NHCCI-Seasonally-Adjusted": "NHCCI (Seasonally Adjusted)"},
+)
+fig_kmeans_line.update_layout(title_x=0.5, xaxis_tickangle=45)
+
+# Major Findings #2, Plot 4 - Normalized Cluster Centers
+norm_df = normalized_df.reset_index().rename(columns={"index": "Feature"})
+norm_long = norm_df.melt(id_vars="Feature", var_name="Cluster", value_name="Value")
+
+# Plot
+fig_cluster_centers = px.line(
+    norm_long,
+    x="Feature",
+    y="Value",
+    color="Cluster",
+    markers=True,
+    title="Normalized Cluster Center Comparison Across Economic Indicators"
+)
+fig_cluster_centers.update_layout(title_x=0.5)
+
+# Major Findings #3, Predicted vs Actual NHCCI by Lasso model
+fig_lasso = go.Figure()
+fig_lasso.add_trace(go.Scatter(
+    x=lasso_df["datetime"],
+    y=lasso_df["NHCCI-Seasonally-Adjusted"],
+    mode="lines",
+    name="Actual",
+    line=dict(color="#2563eb", width=2)
+))
+
+fig_lasso.add_trace(go.Scatter(
+    x=lasso_df["datetime"],
+    y=lasso_df["Predicted_NHCCI"],
+    mode="lines",
+    name="Predicted",
+    line=dict(color="orange", width=2, dash="dash")
+))
+
+fig_lasso.update_layout(
+    title="LassoCV Regression Model - Actual vs. Predicted NHCCI",
+    title_x=0.5,
+    xaxis_title="Date",
+    yaxis_title="NHCCI (Seasonally Adjusted)",
+    legend_title_text='',
+    xaxis_tickangle=45
+)
 
 layout = html.Div([
     html.Div([
@@ -48,12 +186,12 @@ layout = html.Div([
         html.P("Figure 3: ACF and PACF Plots to Guide Parameter Selection", style={'textAlign': 'center', 'color': '#cbd5e0'}),
         html.P("These plots were used to identify suitable SARIMA parameters, revealing a strong autocorrelation at lag 1 and partial autocorrelation at lag 2.", style={'textAlign': 'center', 'color': '#94a3b8'}),
 
-        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_price_forecast_CI.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
-        html.P("Figure 4: SARIMA Forecast with 95% Confidence Interval", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("The SARIMA model accurately captures future increases with tight forecast bounds. This supports its reliability for infrastructure cost projections.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+        dcc.Graph(figure=fig_forecast),
+        html.P("Figure 4: Forecast vs Actual NHCCI with 95% Confidence Interval (Interactive)", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("This visualization matches the original layout using train, test, and forecasted data, including shaded bounds for confidence.", style={'textAlign': 'center', 'color': '#94a3b8'}),
 
-        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_forecast_residuals_SARIMA.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
-        html.P("Figure 5: Forecast Residuals – Actual vs. Predicted NHCCI", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        dcc.Graph(figure=fig_residuals),
+        html.P("Figure 5: Forecast Residuals – Actual vs. Predicted NHCCI (Interactive)", style={'textAlign': 'center', 'color': '#cbd5e0'}),
         html.P("Residuals fluctuate around zero, indicating low bias. The pattern also lacks severe autocorrelation, confirming a good model fit.", style={'textAlign': 'center', 'color': '#94a3b8'}),
 
         html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_extended_forecast.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
@@ -101,16 +239,62 @@ layout = html.Div([
         html.P("Figure 2: NHCCI Distribution by Investment Cluster", style={'textAlign': 'center', 'color': '#cbd5e0'}),
         html.P("High Investment periods show higher median NHCCI values compared to Low Investment periods.", style={'textAlign': 'center', 'color': '#94a3b8'}),
 
-        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_high_low_investment_lineplot.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
-        html.P("Figure 3: NHCCI Over Time by Investment Cluster", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        dcc.Graph(figure=fig_kmeans_line),
+        html.P("Figure 3: NHCCI Over Time by Investment Cluster (Interactive)", style={'textAlign': 'center', 'color': '#cbd5e0'}),
         html.P("Time series visualization highlights the duration and magnitude of investment phases.", style={'textAlign': 'center', 'color': '#94a3b8'}),
 
-        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_normalized_cluster_economic.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
-        html.P("Figure 4: Normalized Cluster Center Comparison Across Economic Indicators", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        dcc.Graph(figure=fig_cluster_centers),
+        html.P("Figure 4: Normalized Cluster Center Comparison Across Economic Indicators (Interactive)", style={'textAlign': 'center', 'color': '#cbd5e0'}),
         html.P("Normalization highlights key macroeconomic differences between investment phases (e.g., employment, inflation, GDP).", style={'textAlign': 'center', 'color': '#94a3b8'}),
 
         html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_top10_component_investment_clusters.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
         html.P("Figure 5: Top 10 Components Driving Cluster Differences", style={'textAlign': 'center', 'color': '#cbd5e0'}),
         html.P("Asphalt and Bridge were the most influential components distinguishing between High and Low Investment clusters.", style={'textAlign': 'center', 'color': '#94a3b8'})
+    ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
+    
+    html.Div([
+        html.H1("Major Finding #3: LassoCV Macro Regression", style={
+            'fontSize': '3rem',
+            'color': '#38bdf8',
+            'marginBottom': '20px'
+        }),
+        html.P("We applied a LassoCV model to determine which macroeconomic indicators most accurately predicted NHCCI trends. The model confirmed that a sparse subset of features, notably lagged PPI and personal consumption, capture key cost movement signals. The model achieved a high Test R² of 0.87.", style={'fontSize': '1.3rem', 'color': '#cbd5e0'}),
+        html.P("Model Summary:", style={'fontSize': '1.2rem', 'color': '#fbbf24', 'marginTop': '20px'}),
+        html.Ul([
+            html.Li("LassoCV performed variable selection among economic indicators."),
+            html.Li("Optimal alpha: 0.00163"),
+            html.Li("Selected Features: TTLCONS_lag1, PPIACO_lag1"),
+            html.Li("Train R²: 0.94, Test R²: 0.87"),
+            html.Li("Confirms hypothesis that lagged macro variables explain NHCCI trends.")
+        ], style={
+            'color': '#e5e7eb',
+            'fontSize': '1.1rem',
+            'lineHeight': '1.8',
+            'maxWidth': '900px',
+            'margin': '20px auto'
+        })
+    ], style={
+        'background': 'linear-gradient(to right, #1e3a8a, #0f172a)',
+        'padding': '100px 20px',
+        'textAlign': 'center',
+        'boxShadow': '0 4px 20px rgba(0,0,0,0.3)'
+    }),
+
+    html.Div([
+        html.H3("Key Visualization", style={'color': '#fbbf24', 'textAlign': 'center'}),
+        
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_lassocv_coefficients.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+        html.P("Figure 1: NHCCI Distribution by Investment Cluster", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("The bar chart shows the coefficients selected by the LassoCV model, highlighting the most influential macroeconomic predictors of NHCCI. PPIACO (Producer Price Index) and TTLCONS (Total Construction Spending) emerged as the only retained features, indicating their strong predictive relationship with construction costs.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+
+                
+        dcc.Graph(figure=fig_lasso),
+        html.P("Figure 2: Actual vs Predicted NHCCI using LassoCV (Interactive)", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("Clear alignment between predicted and actual NHCCI confirms model’s generalization and explanatory power.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+        
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_lassoCV_heatmap_corr.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+        html.P("Figure 3: NHCCI Distribution by Investment Cluster", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("The heatmap displays the correlation between the selected predictors and NHCCI. Both PPIACO_lag1 and TTLCONS_lag1 exhibit high positive correlations (0.92 and 0.90 respectively) with NHCCI, supporting their inclusion in the model and reinforcing the strength of their linear association with highway construction costs.", style={'textAlign': 'center', 'color': '#94a3b8'})
+
     ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'})
 ])

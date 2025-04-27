@@ -1,18 +1,24 @@
 import dash
 from dash import html, dcc, Input, Output, State, register_page, callback_context
 import dash_bootstrap_components as dbc
+import dash_table
+import pandas as pd
 
 # Register the page
 register_page(__name__, path="/analytical", name="Analytical Methods")
 
 # Load images function
-def load_images(year_range):
-    base_url = "https://storage.googleapis.com/databucket_seniorproj/Natural_Gas_Clustering/Natural_Gas_"
+def load_images(year_range, group):
+    # Proper base filename (strip the _Clustering part for filename)
+    base_filename = group.replace('_Clustering', '')
+    base_url = f"https://storage.googleapis.com/databucket_seniorproj/{group}/{base_filename}_"
     images = []
     for year in range(year_range[0], year_range[1] + 1):
         image_url = f"{base_url}{year}.png"
         images.append(image_url)
-    print("Loaded images:", images)
+
+    # Debugging print statement
+    print(f"Loaded images for {group}: {images}")  # Ensure URLs are correct here
     return images
 
 # Layout for the page
@@ -34,10 +40,57 @@ layout = html.Div([
     }),
 
     # Energy Infrastructure Section
+html.Div([
+    html.H2("Energy Infrastructure", style={'color': '#fbbf24', 'textAlign': 'center'}),
+    html.P(
+            "A Gaussian Mixture Model (GMM) is a way to group data into clusters based on the idea that the data comes from a mix of several normal distributions. Each cluster is represented by one of these distributions, and the model tries to figure out the best fit. Unlike methods like k-means, which assigns each data point to one cluster, GMM gives a probability for each point to belong to multiple clusters, which makes it a bit more flexible for more complex patterns in the data. Below are three sliders to cluster all the EIA data points into clusters for three different categories of energy in order to use this data as a signal for total infrastructure spending.",style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
+        ),
+    # First Group
+    html.H3("Natural Gas Infrastructure", style={'color': '#38bdf8', 'textAlign': 'center'}),
+    dcc.RangeSlider(
+        id='year-range-slider-1',
+        min=2000,
+        max=2021,
+        step=1,
+        marks={year: str(year) for year in range(2000, 2022, 2)},
+        value=[2000, 2005],
+        tooltip={"placement": "bottom", "always_visible": True},
+    ),
+    html.Div(id='slideshow-container-1', style={'textAlign': 'center', 'margin': '30px 0'}),
     html.Div([
-        html.H2("Energy Infrastructure", style={'color': '#fbbf24', 'textAlign': 'center'}),
+        dbc.Button("Previous", id="prev-button-1", color="primary", className="me-2", n_clicks=0),
+        dbc.Button("Next", id="next-button-1", color="primary", n_clicks=0),
+    ], style={'textAlign': 'center'}),
+    dcc.Store(id='image-index-1', data=0),
+    dcc.Store(id='image-list-1', data=load_images([2000, 2005],group="Natural_Gas_Clustering")),  
+
+    html.Hr(style={'margin': '40px 0'}),
+
+    # Second Group
+    html.H3("Coal Infastructure", style={'color': '#38bdf8', 'textAlign': 'center'}),
+    dcc.RangeSlider(
+        id='year-range-slider-2',
+        min=2000,
+        max=2021,
+        step=1,
+        marks={year: str(year) for year in range(2000, 2022, 2)},
+        value=[2000, 2005],
+        tooltip={"placement": "bottom", "always_visible": True},
+    ),
+    html.Div(id='slideshow-container-2', style={'textAlign': 'center', 'margin': '30px 0'}),
+    html.Div([
+        dbc.Button("Previous", id="prev-button-2", color="primary", className="me-2", n_clicks=0),
+        dbc.Button("Next", id="next-button-2", color="primary", n_clicks=0),
+    ], style={'textAlign': 'center'}),
+    dcc.Store(id='image-index-2', data=0),
+    dcc.Store(id='image-list-2', data=load_images([2000, 2005],group="Coal_Clustering")),  
+
+    html.Hr(style={'margin': '40px 0'}),
+
+    # Third Group (Electricity)
+        html.H3("Electricity Infrastructure", style={'color': '#38bdf8', 'textAlign': 'center'}),
         dcc.RangeSlider(
-            id='year-range-slider',
+            id='year-range-slider-3',
             min=2000,
             max=2021,
             step=1,
@@ -45,15 +98,16 @@ layout = html.Div([
             value=[2000, 2005],
             tooltip={"placement": "bottom", "always_visible": True},
         ),
-        html.Div(id='slideshow-container', style={'textAlign': 'center', 'margin': '30px 0'}),
+        html.Div(id='slideshow-container-3', style={'textAlign': 'center', 'margin': '30px 0'}),
         html.Div([
-            dbc.Button("Previous", id="prev-button", color="primary", className="me-2", n_clicks=0),
-            dbc.Button("Next", id="next-button", color="primary", n_clicks=0),
+            dbc.Button("Previous", id="prev-button-3", color="primary", className="me-2", n_clicks=0),
+            dbc.Button("Next", id="next-button-3", color="primary", n_clicks=0),
         ], style={'textAlign': 'center'}),
-        dcc.Store(id='image-index', data=0),
-        dcc.Store(id='image-list', data=load_images([2000, 2005]))
+        dcc.Store(id='image-index-3', data=0),
+        dcc.Store(id='image-list-3', data=load_images([2000, 2005], group="Electricity_Clustering")),
 
     ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
+
     
     # Highway Infrastructure Section
     html.Div([
@@ -120,48 +174,52 @@ layout = html.Div([
 ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
     
 ])
+# Helper function to create similar callbacks with dynamic group
+def create_callbacks(slider_id, prev_id, next_id, image_list_id, image_index_id, slideshow_container_id, group):
+    @dash.callback(
+        Output(image_list_id, 'data'),
+        Output(image_index_id, 'data'),
+        Input(slider_id, 'value'),
+        Input(prev_id, 'n_clicks'),
+        Input(next_id, 'n_clicks'),
+        State(image_index_id, 'data'),
+        State(image_list_id, 'data')
+    )
+    def update_images(year_range, prev_clicks, next_clicks, current_index, image_list):
+        ctx = callback_context
 
-# Combined callback for both year range and buttons
-@dash.callback(
-    Output('image-list', 'data'),
-    Output('image-index', 'data'),
-    Input('year-range-slider', 'value'),
-    Input('prev-button', 'n_clicks'),
-    Input('next-button', 'n_clicks'),
-    State('image-index', 'data'),
-    State('image-list', 'data')
-)
-def update_images(year_range, prev_clicks, next_clicks, current_index, image_list):
-    ctx = callback_context
+        if not ctx.triggered:
+            raise dash.exceptions.PreventUpdate
 
-    if not ctx.triggered:
-        raise dash.exceptions.PreventUpdate
+        trigger_id = ctx.triggered[0]['prop_id'].split('.')[0]
 
-    trigger_id = ctx.triggered[0]['prop_id'].split('.')[0]
+        # Call the load_images function with the group parameter
+        if trigger_id == slider_id:
+            new_images = load_images(year_range, group)  # Passing the group here
+            return new_images, 0
 
-    # Range slider changed: reload images
-    if trigger_id == 'year-range-slider':
-        new_images = load_images(year_range)
-        return new_images, 0
+        if not image_list:
+            return dash.no_update, 0
 
-    if not image_list:
-        return dash.no_update, 0
+        if trigger_id == next_id:
+            current_index = (current_index + 1) % len(image_list)
+        elif trigger_id == prev_id:
+            current_index = (current_index - 1) % len(image_list)
 
-    # Button navigation
-    if trigger_id == 'next-button':
-        current_index = (current_index + 1) % len(image_list)
-    elif trigger_id == 'prev-button':
-        current_index = (current_index - 1) % len(image_list)
+        return dash.no_update, current_index
 
-    return dash.no_update, current_index
+    @dash.callback(
+        Output(slideshow_container_id, 'children'),
+        Input(image_index_id, 'data'),
+        State(image_list_id, 'data')
+    )
+    def display_image(index, image_list):
+        if not image_list:
+            return html.P("No images found for the selected range.", style={'color': 'red'})
+        return html.Img(src=image_list[index], style={'width': '60%', 'height': 'auto'})
 
-# Callback to display current image
-@dash.callback(
-    Output('slideshow-container', 'children'),
-    Input('image-index', 'data'),
-    State('image-list', 'data')
-)
-def display_image(index, image_list):
-    if not image_list:
-        return html.P("No images found for the selected range.", style={'color': 'red'})
-    return html.Img(src=image_list[index], style={'width': '60%', 'height': 'auto'})
+
+# Create the 3 callback sets with dynamic group names
+create_callbacks('year-range-slider-1', 'prev-button-1', 'next-button-1', 'image-list-1', 'image-index-1', 'slideshow-container-1', "Natural_Gas_Clustering")
+create_callbacks('year-range-slider-2', 'prev-button-2', 'next-button-2', 'image-list-2', 'image-index-2', 'slideshow-container-2', "Coal_Clustering")
+create_callbacks('year-range-slider-3', 'prev-button-3', 'next-button-3', 'image-list-3', 'image-index-3', 'slideshow-container-3', "Electricity_Clustering")

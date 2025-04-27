@@ -296,5 +296,26 @@ layout = html.Div([
         html.P("Figure 3: NHCCI Distribution by Investment Cluster", style={'textAlign': 'center', 'color': '#cbd5e0'}),
         html.P("The heatmap displays the correlation between the selected predictors and NHCCI. Both PPIACO_lag1 and TTLCONS_lag1 exhibit high positive correlations (0.92 and 0.90 respectively) with NHCCI, supporting their inclusion in the model and reinforcing the strength of their linear association with highway construction costs.", style={'textAlign': 'center', 'color': '#94a3b8'})
 
-    ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'})
+    ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
+    html.Div([
+        html.H1("Major Finding #4: Regression on GMM Results", style={
+            'fontSize': '3rem',
+            'color': '#38bdf8',
+            'marginBottom': '20px'
+        }),
+        html.P("Goal/explanation", style={'fontSize': '1.3rem', 'color': '#cbd5e0'}),
+        html.P("", style={'fontSize': '1.3rem', 'color': '#cbd5e0'}),
+        html.P("", style={'fontSize': '1.3rem', 'color': '#cbd5e0'}),
+        html.P("MR1 Exp", style={'fontSize': '1.3rem', 'color': '#cbd5e0'}),
+
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/EDA_Graphs/Feature%20Importance%20for%20Predicting%20Energy%20Expenditures.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+
+        
+    ], style={
+        'background': 'linear-gradient(to right, #0f172a, #1e3a8a)',
+        'padding': '100px 20px',
+        'textAlign': 'center',
+        'boxShadow': '0 4px 20px rgba(0,0,0,0.3)'
+    }),
 ])
+

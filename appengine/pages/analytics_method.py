@@ -1,8 +1,6 @@
 import dash
 from dash import html, dcc, Input, Output, State, register_page, callback_context
 import dash_bootstrap_components as dbc
-import dash_table
-import pandas as pd
 
 # Register the page
 register_page(__name__, path="/analytical", name="Analytical Methods")
@@ -18,8 +16,8 @@ def load_images(year_range, group):
         images.append(image_url)
 
     # Debugging print statement
-    print(f"Loaded images for {group}: {images}")  # Ensure URLs are correct here
-    return images
+    # print(f"Loaded images for {group}: {images}")  # Ensure URLs are correct here
+    # return images
 
 # Layout for the page
 layout = html.Div([
@@ -172,6 +170,55 @@ html.Div([
     ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'})
     
 ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
+    
+    html.Div([
+    html.H2("Multivariate Regression with Ridge Regularization", style={'color': '#fbbf24', 'textAlign': 'center'}),
+    
+    html.P(
+        "To explore interactions between government levels, modes of transportation, and their influence on infrastructure spending patterns, we implemented Ridge Regression (L2 regularization). Ridge regression was selected due to its ability to handle multicollinearity and stabilize coefficient estimates, especially when interaction terms are introduced.",
+        style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
+    ),
+
+    html.P(
+        "The model used log-transformed spending values (log(1 + x)) as the target variable and incorporated interaction terms between 'gov_level' and 'mode' through formula-based feature engineering (`patsy`). We standardized predictors to ensure comparability before applying Ridge regularization. Separate models were trained for Capital and Non-Capital expenditures.",
+        style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '20px auto'}
+    ),
+
+    html.P(
+        "Model performance was evaluated using out-of-sample R² scores, and residual plots were examined for patterns or heteroskedasticity. Coefficient analysis identified key government-mode interactions associated with higher or lower log spending, supporting the hypothesis that expenditure drivers vary across governance structures and transportation modes.",
+        style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '20px auto'}
+    ),
+
+    html.P(
+        "References: Hoerl & Kennard (1970), 'Ridge Regression: Biased Estimation for Nonorthogonal Problems'; James et al. (2013), 'An Introduction to Statistical Learning'; Scikit-learn Ridge Regression Documentation.",
+        style={'color': '#9ca3af', 'fontSize': '0.95rem', 'fontStyle': 'italic', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '20px auto'}
+    )
+], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
+    
+    html.Div([
+    html.H2("Time Series Decomposition and Cross-Correlation Analysis", style={'color': '#fbbf24', 'textAlign': 'center'}),
+
+    html.P(
+        "To better understand long-term trends, seasonal patterns, and cyclical behavior in transportation infrastructure spending, we applied classical time series decomposition (additive model) to the TPFS dataset. Spending was grouped by government level and mode (e.g., Highways, Transit) to separate trend, seasonal, and residual components.",
+        style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
+    ),
+
+    html.P(
+        "Following decomposition, we conducted lagged cross-correlation analysis between highway spending and macroeconomic indicators (GDP, PPI, total construction spending). This analysis measured how changes in infrastructure investment aligned with or preceded shifts in broader economic conditions. Positive leading correlations would suggest infrastructure spending could act as a predictor of future economic health.",
+        style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '20px auto'}
+    ),
+
+    html.P(
+        "Visualization included multi-axis time series plots comparing highway spending against economic metrics and lagged correlation bar charts to detect temporal dynamics. Insights from decomposition and correlation guided further modeling strategies.",
+        style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '20px auto'}
+    ),
+
+    html.P(
+        "References: Cleveland et al. (1990), 'STL: A Seasonal-Trend Decomposition Procedure Based on Loess'; Hyndman & Athanasopoulos (2018), 'Forecasting: Principles and Practice'; Box & Jenkins (1970), 'Time Series Analysis: Forecasting and Control'.",
+        style={'color': '#9ca3af', 'fontSize': '0.95rem', 'fontStyle': 'italic', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '20px auto'}
+    )
+], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'})
+
     
 ])
 # Helper function to create similar callbacks with dynamic group

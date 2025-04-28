@@ -1,4 +1,4 @@
-from dash import register_page, html, dcc
+from dash import register_page, html, dcc, Input, Output
 import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
@@ -14,6 +14,8 @@ forecast_df = pd.read_csv("https://storage.googleapis.com/databucket_seniorproj/
 cluster_line_df = pd.read_csv("https://storage.googleapis.com/databucket_seniorproj/NHCCI%20Data/nhcci_cluster_input.csv")
 normalized_df = pd.read_csv("https://storage.googleapis.com/databucket_seniorproj/NHCCI%20Data/nhcci_norm_cluster_centers.csv", index_col=0)
 lasso_df = pd.read_csv("https://storage.googleapis.com/databucket_seniorproj/NHCCI%20Data/nhcci_LASSO_plot_df.csv")
+ridge_cap_top_df = pd.read_csv("https://storage.googleapis.com/databucket_seniorproj/TPFS_Data/TPFS_ridge_top_coefs.csv")
+econ_time_df = pd.read_csv("https://storage.googleapis.com/databucket_seniorproj/TPFS_Data/TPFS_economic_indicators_time_series.csv")
 
 # Convert datetime fields
 # plot_df["datetime"] = pd.to_datetime(plot_df["datetime"])
@@ -88,15 +90,74 @@ fig_residuals.add_hline(y=0, line_dash="dash", line_color="black")
 fig_residuals.update_layout(title_x=0.5)
 
 # Major Findings #2, Plot 3 - NHCCI over Time by Investment Cluster
-fig_kmeans_line = px.line(
-    cluster_line_df,
-    x="datetime",
-    y="NHCCI-Seasonally-Adjusted",
-    color="Spending Cluster Label",
-    title="NHCCI Over Time by Investment Cluster",
-    labels={"datetime": "Year", "NHCCI-Seasonally-Adjusted": "NHCCI (Seasonally Adjusted)"},
+
+# Helper: function to split segments by cluster
+def split_segments(df, cluster_label):
+    segments = []
+    temp_segment = []
+    
+    for i in range(len(df)):
+        if df.iloc[i]["Spending Cluster Label"] == cluster_label:
+            temp_segment.append(df.iloc[i])
+        else:
+            if temp_segment:
+                segments.append(pd.DataFrame(temp_segment))
+                temp_segment = []
+    if temp_segment:
+        segments.append(pd.DataFrame(temp_segment))
+    return segments
+
+# Create figure
+fig_segmented = go.Figure()
+
+# Plot High Investment segments
+high_segments = split_segments(cluster_line_df, "High Investment")
+for seg in high_segments:
+    fig_segmented.add_trace(go.Scatter(
+        x=seg["datetime"],
+        y=seg["NHCCI-Seasonally-Adjusted"],
+        mode="lines+markers",
+        name="High Investment",
+        line=dict(color="blue"),
+        marker=dict(size=4),
+        showlegend=False  # Avoid repeating legend
+    ))
+
+# Plot Low Investment segments
+low_segments = split_segments(cluster_line_df, "Low Investment")
+for seg in low_segments:
+    fig_segmented.add_trace(go.Scatter(
+        x=seg["datetime"],
+        y=seg["NHCCI-Seasonally-Adjusted"],
+        mode="lines+markers",
+        name="Low Investment",
+        line=dict(color="red"),
+        marker=dict(size=4),
+        showlegend=False
+    ))
+
+# Add manual legends (since we suppressed repeating them)
+fig_segmented.add_trace(go.Scatter(
+    x=[None], y=[None],
+    mode="lines",
+    line=dict(color="blue"),
+    name="High Investment"
+))
+fig_segmented.add_trace(go.Scatter(
+    x=[None], y=[None],
+    mode="lines",
+    line=dict(color="red"),
+    name="Low Investment"
+))
+
+fig_segmented.update_layout(
+    title="NHCCI Over Time Segmented by Investment Cluster",
+    title_x=0.5,
+    xaxis_title="Year",
+    yaxis_title="NHCCI (Seasonally Adjusted)",
+    legend_title_text="Spending Cluster Label",
+    xaxis_tickangle=45
 )
-fig_kmeans_line.update_layout(title_x=0.5, xaxis_tickangle=45)
 
 # Major Findings #2, Plot 4 - Normalized Cluster Centers
 norm_df = normalized_df.reset_index().rename(columns={"index": "Feature"})
@@ -139,6 +200,49 @@ fig_lasso.update_layout(
     legend_title_text='',
     xaxis_tickangle=45
 )
+
+# Major Findings #5, High-Impact Interaction Coeffecients for Captial Spending
+fig_ridge_capital_top = px.bar(
+    ridge_cap_top_df.sort_values("Coefficient", ascending=False),
+    x="Coefficient",
+    y="Feature",
+    orientation="h",
+    title="High-Impact Interaction Coefficients (Capital Spending)"
+)
+fig_ridge_capital_top.update_layout(title_x=0.5)
+
+# Create figure based on dropdown selection
+def create_highway_econ_figure(indicator="TTLCONS"):
+    fig = go.Figure()
+
+    fig.add_trace(go.Scatter(
+        x=econ_time_df["Year"],
+        y=econ_time_df["Chained Spending"],
+        mode="lines+markers",
+        name="Highway Spending",
+        yaxis="y1"
+    ))
+
+    fig.add_trace(go.Scatter(
+        x=econ_time_df["Year"],
+        y=econ_time_df[indicator],
+        mode="lines+markers",
+        name=indicator,
+        yaxis="y2"
+    ))
+
+    fig.update_layout(
+        title="Highway Spending vs Economic Indicator",
+        xaxis=dict(title="Year"),
+        yaxis=dict(title="Highway Spending (Chained)", side="left"),
+        yaxis2=dict(title=indicator, overlaying="y", side="right"),
+        legend=dict(x=0.5, y=1.1, orientation="h", xanchor="center"),
+        title_x=0.5,
+        margin=dict(l=40, r=40, t=80, b=40),
+        template="plotly_dark"
+    )
+
+    return fig
 
 layout = html.Div([
     html.Div([
@@ -239,7 +343,7 @@ layout = html.Div([
         html.P("Figure 2: NHCCI Distribution by Investment Cluster", style={'textAlign': 'center', 'color': '#cbd5e0'}),
         html.P("High Investment periods show higher median NHCCI values compared to Low Investment periods.", style={'textAlign': 'center', 'color': '#94a3b8'}),
 
-        dcc.Graph(figure=fig_kmeans_line),
+        dcc.Graph(figure=fig_segmented),
         html.P("Figure 3: NHCCI Over Time by Investment Cluster (Interactive)", style={'textAlign': 'center', 'color': '#cbd5e0'}),
         html.P("Time series visualization highlights the duration and magnitude of investment phases.", style={'textAlign': 'center', 'color': '#94a3b8'}),
 
@@ -286,8 +390,7 @@ layout = html.Div([
         html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_lassocv_coefficients.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
         html.P("Figure 1: NHCCI Distribution by Investment Cluster", style={'textAlign': 'center', 'color': '#cbd5e0'}),
         html.P("The bar chart shows the coefficients selected by the LassoCV model, highlighting the most influential macroeconomic predictors of NHCCI. PPIACO (Producer Price Index) and TTLCONS (Total Construction Spending) emerged as the only retained features, indicating their strong predictive relationship with construction costs.", style={'textAlign': 'center', 'color': '#94a3b8'}),
-
-                
+      
         dcc.Graph(figure=fig_lasso),
         html.P("Figure 2: Actual vs Predicted NHCCI using LassoCV (Interactive)", style={'textAlign': 'center', 'color': '#cbd5e0'}),
         html.P("Clear alignment between predicted and actual NHCCI confirms model’s generalization and explanatory power.", style={'textAlign': 'center', 'color': '#94a3b8'}),
@@ -297,6 +400,7 @@ layout = html.Div([
         html.P("The heatmap displays the correlation between the selected predictors and NHCCI. Both PPIACO_lag1 and TTLCONS_lag1 exhibit high positive correlations (0.92 and 0.90 respectively) with NHCCI, supporting their inclusion in the model and reinforcing the strength of their linear association with highway construction costs.", style={'textAlign': 'center', 'color': '#94a3b8'})
 
     ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
+    
     html.Div([
         html.H1("Major Finding #4: Regression on GMM Results", style={
             'fontSize': '3rem',
@@ -309,13 +413,133 @@ layout = html.Div([
         html.P("MR1 Exp", style={'fontSize': '1.3rem', 'color': '#cbd5e0'}),
 
         html.Img(src="https://storage.googleapis.com/databucket_seniorproj/EDA_Graphs/Feature%20Importance%20for%20Predicting%20Energy%20Expenditures.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
-
-        
+     
     ], style={
         'background': 'linear-gradient(to right, #0f172a, #1e3a8a)',
         'padding': '100px 20px',
         'textAlign': 'center',
         'boxShadow': '0 4px 20px rgba(0,0,0,0.3)'
     }),
+    
+    html.Div([
+        html.H1("Major Finding #5: Ridge Regression on TPFS Capital Spending", style={
+            'fontSize': '3rem',
+            'color': '#38bdf8',
+            'marginBottom': '20px'
+        }),
+        html.P("We applied Ridge regression with log-transformed TPFS spending data to model both capital and non-capital infrastructure expenses. Incorporating interaction terms between transportation modes and government levels allowed a richer understanding of funding dynamics. The model achieved strong explanatory performance, with R² scores of 0.80 (Capital) and 0.81 (Non-Capital).", style={'fontSize': '1.3rem', 'color': '#cbd5e0'}),
+        html.P("Model Summary:", style={'fontSize': '1.2rem', 'color': '#fbbf24', 'marginTop': '20px'}),
+        html.Ul([
+            html.Li("Ridge Regression regularized model coefficients to reduce multicollinearity."),
+            html.Li("Capital Spending Model R²: 0.802."),
+            html.Li("Non-Capital Spending Model R²: 0.809."),
+            html.Li("Top positive drivers for capital spending include federal water investment and highways."),
+            html.Li("Residual plots confirmed reasonable model behavior with minor bias."),
+        ], style={
+            'color': '#e5e7eb',
+            'fontSize': '1.1rem',
+            'lineHeight': '1.8',
+            'maxWidth': '900px',
+            'margin': '20px auto'
+        })
+    ], style={
+        'background': 'linear-gradient(to right, #1e3a8a, #0f172a)',
+        'padding': '100px 20px',
+        'textAlign': 'center',
+        'boxShadow': '0 4px 20px rgba(0,0,0,0.3)'
+    }),
+
+    html.Div([
+        html.H3("Key Visualizations", style={'color': '#fbbf24', 'textAlign': 'center'}),
+
+        dcc.Graph(figure=fig_ridge_capital_top),
+        html.P("Figure 1: High-Impact Capital Coefficients (Interactive)", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("Interactive bar plot revealing the most influential mode-government interactions driving capital spending, such as federal investments in Water infrastructure and Highway projects.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/TPFS_Plots/TPFS_cap_vs_noncap_spending.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+        html.P("Figure 2: Average Log Spending by Capital vs Non-Capital", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("Comparative bar chart illustrating that capital projects account for the majority of infrastructure investments across key transportation modes.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/TPFS_Plots/TPFS_ridge_capital_lineplot.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+        html.P("Figure 3: Actual vs Predicted Log Spending (Capital)", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("Line plot comparing predicted and actual capital expenditures. Close alignment along the 45° reference line validates model accuracy.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/TPFS_Plots/TPFS_ridge_residual.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+        html.P("Figure 4: Residual Plot for Capital Model", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("Residuals scattered symmetrically around zero with little bias/heteroskedasticity, supporting strong generalization of our Ridge model.", style={'textAlign': 'center', 'color': '#94a3b8'})
+    ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
+    
+    html.Div([
+        html.H1("Major Finding #6: Infrastructure Spending Time Series Trends", style={
+            'fontSize': '3rem',
+            'color': '#38bdf8',
+            'marginBottom': '20px'
+        }),
+        html.P("We performed time series decomposition and cross-correlation analysis on federal, state/local, and total infrastructure spending. This revealed key long-term trends, and showed that spending leads major economic indicators like GDP and PPI by approximately 2 years.", style={'fontSize': '1.3rem', 'color': '#cbd5e0'}),
+        html.P("Findings Summary:", style={'fontSize': '1.2rem', 'color': '#fbbf24', 'marginTop': '20px'}),
+        html.Ul([
+            html.Li("Spending series show strong trend components with minimal seasonality."),
+            html.Li("Cross-correlation results suggest infrastructure spending peaks precede GDP and PPI growth by ~2 years."),
+            html.Li("Highways spending aligns closely with Total Construction Spending (TTLCONS) and Producer Price Index (PPIACO) movements."),
+            html.Li("Insights can inform lagged forecasting models for economic growth based on public infrastructure investments.")
+        ], style={
+            'color': '#e5e7eb',
+            'fontSize': '1.1rem',
+            'lineHeight': '1.8',
+            'maxWidth': '900px',
+            'margin': '20px auto'
+        })
+    ], style={
+        'background': 'linear-gradient(to right, #1e3a8a, #0f172a)',
+        'padding': '100px 20px',
+        'textAlign': 'center',
+        'boxShadow': '0 4px 20px rgba(0,0,0,0.3)'
+    }),
+
+    html.Div([
+        html.H3("Key Visualizations", style={'color': '#fbbf24', 'textAlign': 'center'}),
+    
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/TPFS_Plots/TPFS_time_series_decomp_fed.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+        html.P("Figure 1: Time Series Decomposition - Federal Infrastructure Spending", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("Decomposition reveals that federal spending trends upward post-2020 without notable seasonality.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/TPFS_Plots/TPFS_time_series_decomp_statelocal.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+        html.P("Figure 2: Time Series Decomposition - State and Local Infrastructure Spending", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("State and local spending followed a gradual rise until 2020, before slight declines due to COVID-related budgetary constraints.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/TPFS_Plots/TPFS_time_series_decomp_total.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+        html.P("Figure 3: Time Series Decomposition - Total Infrastructure Spending", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("Total spending remained stable with noticeable boosts during federal stimulus periods.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/TPFS_Plots/TPFS_time_series_GDP_spending.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+        html.P("Figure 4: Cross-Correlation of Spending Leading GDP", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("Spending leads GDP growth, with strongest positive correlation observed at a 2-year lag.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+
+        dcc.Dropdown(
+            id="indicator_dropdown",
+            options=[
+                {"label": "Total Construction Spending (TTLCONS)", "value": "TTLCONS"},
+                {"label": "Producer Price Index (PPIACO)", "value": "PPIACO"},
+                {"label": "Gross Domestic Product (GDP)", "value": "GDP"}
+            ],
+            value="TTLCONS",
+            style={'width': '60%', 'margin': '20px auto'}
+        ),
+        dcc.Graph(id="highway_econ_graph"),
+        html.P("Figure 5: Highways Spending vs Selected Economic Metric (Interactive)", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("User can select an economic indicator (GDP, PPI, or Total Construction) to visualize its relationship with highway spending over time.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/TPFS_Plots/TPFS_time_series_PPI_spending.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+        html.P("Figure 6: Cross-Correlation of Spending Leading PPI", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("Spending peaks lead PPI inflation by about 2 years, emphasizing infrastructure investment’s influence on construction-related inflation trends.", style={'textAlign': 'center', 'color': '#94a3b8'})
+    ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'})
 ])
 
+from dash import callback 
+
+@callback(
+    Output("highway_econ_graph", "figure"),
+    Input("indicator_dropdown", "value")
+)
+def update_highway_econ_graph(selected_indicator):
+    return create_highway_econ_figure(selected_indicator)

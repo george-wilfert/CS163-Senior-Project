@@ -40,7 +40,7 @@ layout = html.Div([
         }),
         html.Div([
             html.H2("Transport Networks", style={'color': '#2563eb'}),
-            html.P("Insights into highways, railroads, and public transit systems across the country.",
+            html.P("BRENDEN FILL THIS OUT ",
                    style={'color': '#cbd5e0'})
         ], style={
             'flex': '1',
@@ -52,7 +52,7 @@ layout = html.Div([
         }),
         html.Div([
             html.H2("Expanded Effects of Infastructure", style={'color': '#fbbf24'}),
-            html.P("Comprehensive reports and data analysis to guide policy and investment decisions.",
+            html.P("Major Findings that can used to facilitate infastructure stragety ",
                    style={'color': '#cbd5e0'})
         ], style={
             'flex': '1',

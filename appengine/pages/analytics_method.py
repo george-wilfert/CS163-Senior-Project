@@ -39,11 +39,13 @@ layout = html.Div([
     # Energy Infrastructure Section
 html.Div([
     html.H2("Energy Infrastructure", style={'color': '#fbbf24', 'textAlign': 'center'}),
+    html.H3("GMM Model", style={'color': '#38bdf8', 'textAlign': 'center'}),
+
     html.P(
             "A Gaussian Mixture Model (GMM) is a way to group data into clusters based on the idea that the data comes from a mix of several normal distributions. Each cluster is represented by one of these distributions, and the model tries to figure out the best fit. Unlike methods like k-means, which assigns each data point to one cluster, GMM gives a probability for each point to belong to multiple clusters, which makes it a bit more flexible for more complex patterns in the data. Below are three sliders to cluster all the EIA data points into clusters for three different categories of energy in order to use this data as a signal for total infrastructure spending.",style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
         ),
     # First Group
-    html.H3("Natural Gas Infrastructure", style={'color': '#38bdf8', 'textAlign': 'center'}),
+    html.H4("Natural Gas Infrastructure", style={'color': '#38bdf8', 'textAlign': 'center'}),
     dcc.RangeSlider(
         id='year-range-slider-1',
         min=2000,
@@ -64,7 +66,7 @@ html.Div([
     html.Hr(style={'margin': '40px 0'}),
 
     # Second Group
-    html.H3("Coal Infastructure", style={'color': '#38bdf8', 'textAlign': 'center'}),
+    html.H4("Coal Infastructure", style={'color': '#38bdf8', 'textAlign': 'center'}),
     dcc.RangeSlider(
         id='year-range-slider-2',
         min=2000,
@@ -85,7 +87,7 @@ html.Div([
     html.Hr(style={'margin': '40px 0'}),
 
     # Third Group (Electricity)
-        html.H3("Electricity Infrastructure", style={'color': '#38bdf8', 'textAlign': 'center'}),
+        html.H4("Electricity Infrastructure", style={'color': '#38bdf8', 'textAlign': 'center'}),
         dcc.RangeSlider(
             id='year-range-slider-3',
             min=2000,
@@ -104,7 +106,15 @@ html.Div([
         dcc.Store(id='image-list-3', data=load_images([2000, 2005], group="Electricity_Clustering")),
 
     ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
-
+    #Regression Anyalsis
+    html.Div([
+        html.H3("Regression Analysis", style={'color': '#38bdf8', 'textAlign': 'center'}),
+        html.P(
+            "As mentioned above the GMM can give us a lot of very important information that can be used in future types such as regression analysis. The biggest goal of the regression at first is to justify the assumption that I made originally that the energy consumption can be used as a signal for infrastructure. This was done through our first regression analysis using a Random Forest Regressor that predicts the expenditures on infrastructure in a state. After using this assumption we extrapolated out to other factors to justify our hypothesis that infrastructure is correlated with GDP and Urbanization metrics. Using the regression we also get some feature importance graphs that tell us which classifications are important to determining high expenditure and GDP metrics.",style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
+        ),
+    
+    
+    ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
     
     # Highway Infrastructure Section
     html.Div([
@@ -129,13 +139,7 @@ html.Div([
             "References: Box & Jenkins (1970), 'Time Series Analysis: Forecasting and Control'; Hyndman & Athanasopoulos (2018), 'Forecasting: Principles and Practice'.",
             style={'color': '#9ca3af', 'fontSize': '0.95rem', 'fontStyle': 'italic', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '20px auto'}
         )
-    ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
-
-    # Transportation Infrastructure Section (Placeholder)
-    html.Div([
-        html.H2("Transportation Infrastructure", style={'color': '#fbbf24', 'textAlign': 'center'}),
-        html.P("Coming soon...", style={'color': '#cbd5e0', 'textAlign': 'center'})
-    ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
+    ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),    
     
     html.Div([
     html.H2("Spending Cluster Analysis", style={'color': '#fbbf24', 'textAlign': 'center'}),

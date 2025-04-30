@@ -69,12 +69,4 @@ layout = html.Div([
         'padding': '40px 20px',
         'backgroundColor': '#111827'
     }),
-
-    # Additional Info Section (Optional)
-    html.Div([
-        html.H2("About InfraPortal", style={'color': '#38bdf8', 'textAlign': 'center'}),
-        html.P("InfraPortal aggregates and visualizes data from a wide range of sources to help you better understand the infrastructure that powers our world. "
-               "Whether you're interested in energy trends or transportation networks, our platform is designed to provide you with an intuitive, data-driven experience.",
-               style={'fontSize': '1.1rem', 'color': '#cbd5e0', 'textAlign': 'center', 'maxWidth': '800px', 'margin': '0 auto'})
-    ], style={'padding': '60px 20px', 'backgroundColor': '#0f172a'})
 ])

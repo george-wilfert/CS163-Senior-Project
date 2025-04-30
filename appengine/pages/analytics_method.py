@@ -15,9 +15,8 @@ def load_images(year_range, group):
         image_url = f"{base_url}{year}.png"
         images.append(image_url)
 
-    # Debugging print statement
-    # print(f"Loaded images for {group}: {images}")  # Ensure URLs are correct here
-    # return images
+
+    return images
 
 # Layout for the page
 layout = html.Div([

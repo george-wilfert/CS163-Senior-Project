@@ -407,13 +407,22 @@ layout = html.Div([
             'color': '#38bdf8',
             'marginBottom': '20px'
         }),
-        html.P("Goal/explanation", style={'fontSize': '1.3rem', 'color': '#cbd5e0'}),
+        
         html.P("", style={'fontSize': '1.3rem', 'color': '#cbd5e0'}),
-        html.P("", style={'fontSize': '1.3rem', 'color': '#cbd5e0'}),
-        html.P("MR1 Exp", style={'fontSize': '1.3rem', 'color': '#cbd5e0'}),
+        html.P("Our first regression analysis is a focus on predicting expenditures using just the cluster probabilities that were mentioned in previous sections. This model gave us a surprising result of .614 r squared value. This results in a justification for my original goal which was to prove that natural gas usage can be a signal for infrastructure in general. The graph below shows the feature importance for the regression anayalsis. Further analysis will use this clam to build on top to answer our hypothesis.", style={'fontSize': '1.3rem', 'color': '#cbd5e0'}),
 
         html.Img(src="https://storage.googleapis.com/databucket_seniorproj/EDA_Graphs/Feature%20Importance%20for%20Predicting%20Energy%20Expenditures.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
-     
+        html.P("", style={'fontSize': '1.3rem', 'color': '#cbd5e0'}),
+        html.P("This regression analysis tries to answer our first hypothesis which is if there is a correlation between economic metrics and infrastructure. Using our previous conclusion that we can use these natural resources and local energy infrastructure to abstract a larger metric for overall infrastructure development we tested to see the impact of on the GDP as a whole. Assuming GDP is very dependent on other factors we were not confident in the success of this model but wanted to see some sort of correlation. This we did with a r squared of .231 which shows some sort of help but not alot. We will expand this analysis in the next section.", style={'fontSize': '1.3rem', 'color': '#cbd5e0'}),
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/EDA_Graphs/Feature%20Importance%20for%20GDP%20Prediction%201.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+        html.P("", style={'fontSize': '1.3rem', 'color': '#cbd5e0'}),
+        html.P("Given our subpar results with just the GMM cluster we added a couple more features to hopefully include different factors of the economy such as population and productivity rate. This made an instant improvement. We got an R squared of .67 which was very good for predicting economic metrics. Our conclusion is these local energy infrastructure metrics and natural resource use is a good indicator of total economy metrics which proves our first hypothesis.", style={'fontSize': '1.3rem', 'color': '#cbd5e0'}),
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/EDA_Graphs/Feature%20Importance%20for%20GDP%20Prediction%202.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+        html.P("Lastly for the energy aspect of the project we wanted to help give evidence to our second hypothesis that our signals previously mentioned helped to predict and impact urbanization. This is a statewide analysis so there is higher amounts of variation compared to looking at local structures but still good for concept. We did a regression on urbanization rating found and averaged from governmental sources of states based on the same features as our second GDP regression. We were also successful in getting correlations between urbanization and our indicators so it helps answer our second hypothesis that urbanization is correlated with infrastructure.", style={'fontSize': '1.3rem', 'color': '#cbd5e0'}),
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/EDA_Graphs/Feature%20Importance%20for%20Predicting%20Urbanization%20Metric.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+
+
+
     ], style={
         'background': 'linear-gradient(to right, #0f172a, #1e3a8a)',
         'padding': '100px 20px',

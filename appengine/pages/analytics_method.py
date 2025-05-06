@@ -178,7 +178,7 @@ html.Div([
     html.H2("Multivariate Regression with Ridge Regularization", style={'color': '#fbbf24', 'textAlign': 'center'}),
     
     html.P(
-        "To explore interactions between government levels, modes of transportation, and their influence on infrastructure spending patterns, we implemented Ridge Regression (L2 regularization). Ridge regression was selected due to its ability to handle multicollinearity and stabilize coefficient estimates, especially when interaction terms are introduced.",
+        "To explore interactions between government levels, modes of transportation, and their influence on transportation infrastructure spending patterns, we implemented Ridge Regression (L2 regularization). Ridge regression was selected due to its ability to handle multicollinearity and stabilize coefficient estimates, especially when interaction terms are introduced.",
         style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
     ),
 
@@ -220,9 +220,32 @@ html.Div([
         "References: Cleveland et al. (1990), 'STL: A Seasonal-Trend Decomposition Procedure Based on Loess'; Hyndman & Athanasopoulos (2018), 'Forecasting: Principles and Practice'; Box & Jenkins (1970), 'Time Series Analysis: Forecasting and Control'.",
         style={'color': '#9ca3af', 'fontSize': '0.95rem', 'fontStyle': 'italic', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '20px auto'}
     )
-], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'})
+], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
 
-    
+    html.Div([
+    html.H2("Anomaly Detection using Isolation Forest", style={'color': '#fbbf24', 'textAlign': 'center'}),
+
+    html.P(
+        "To identify unusual transportation infrastructure spending behavior, we applied an Isolation Forest model on the TPFS dataset. Isolation Forest is an unsupervised anomaly detection method that works by isolating observations through recursive partitioning. Observations that are easier to isolate are considered anomalies.",
+        style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '0 auto'}
+    ),
+
+    html.P(
+        "The model was run separately across each combination of transportation mode and government level to account for differences in spending patterns. Spending data was first filtered to remove missing values and then grouped accordingly. The model flagged approximately 10% of entries as anomalous, which were then analyzed to detect outliers in inflation-adjusted ('chained') values.",
+        style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '20px auto'}
+    ),
+
+    html.P(
+        "We visualized the frequency of anomalies using heatmaps across time and spending categories, and produced a ranked list of the most anomalous entries using the associated project descriptions. These results help uncover potential data errors, overspending patterns, or policy shocks within specific modes and jurisdictions.",
+        style={'color': '#cbd5e0', 'fontSize': '1.1rem', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '20px auto'}
+    ),
+
+    html.P(
+        "References: Liu et al. (2008), 'Isolation Forest'; Breunig et al. (2000), 'LOF: Identifying Density-Based Local Outliers'; Scikit-learn IsolationForest Documentation.",
+        style={'color': '#9ca3af', 'fontSize': '0.95rem', 'fontStyle': 'italic', 'textAlign': 'center', 'maxWidth': '900px', 'margin': '20px auto'}
+    )
+], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
+   
 ])
 # Helper function to create similar callbacks with dynamic group
 def create_callbacks(slider_id, prev_id, next_id, image_list_id, image_index_id, slideshow_container_id, group):

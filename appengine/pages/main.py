@@ -6,7 +6,7 @@ register_page(__name__, path='/')
 layout = html.Div([
     # Hero Banner Section
     html.Div([
-        html.H1("Welcome to Our Infrastructure Anyalsis!", style={
+        html.H1("Welcome to Our Infrastructure Analysis!", style={
             'fontSize': '4rem',
             'color': '#38bdf8',
             'marginBottom': '20px'

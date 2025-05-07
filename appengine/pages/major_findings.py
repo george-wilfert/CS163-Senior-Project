@@ -13,7 +13,6 @@ test_df = pd.read_csv("https://storage.googleapis.com/databucket_seniorproj/NHCC
 forecast_df = pd.read_csv("https://storage.googleapis.com/databucket_seniorproj/NHCCI%20Data/nhcci_SARIMA_forecast_plot.csv")
 cluster_line_df = pd.read_csv("https://storage.googleapis.com/databucket_seniorproj/NHCCI%20Data/nhcci_cluster_input.csv")
 normalized_df = pd.read_csv("https://storage.googleapis.com/databucket_seniorproj/NHCCI%20Data/nhcci_norm_cluster_centers.csv", index_col=0)
-lasso_df = pd.read_csv("https://storage.googleapis.com/databucket_seniorproj/NHCCI%20Data/nhcci_LASSO_plot_df.csv")
 econ_time_df = pd.read_csv("https://storage.googleapis.com/databucket_seniorproj/TPFS_Data/TPFS_economic_indicators_time_series.csv")
 
 # Major Finding #1, Plot 4 - Creating SARIMA (forecast vs actual) plot
@@ -170,35 +169,7 @@ fig_cluster_centers = px.line(
 )
 fig_cluster_centers.update_layout(title_x=0.5)
 
-# Major Findings #3, Predicted vs Actual NHCCI by Lasso model
-# ---------------------------------------------------------- #
-fig_lasso = go.Figure()
-fig_lasso.add_trace(go.Scatter(
-    x=lasso_df["datetime"],
-    y=lasso_df["NHCCI-Seasonally-Adjusted"],
-    mode="lines",
-    name="Actual",
-    line=dict(color="#2563eb", width=2)
-))
-
-fig_lasso.add_trace(go.Scatter(
-    x=lasso_df["datetime"],
-    y=lasso_df["Predicted_NHCCI"],
-    mode="lines",
-    name="Predicted",
-    line=dict(color="orange", width=2, dash="dash")
-))
-
-fig_lasso.update_layout(
-    title="LassoCV Regression Model - Actual vs. Predicted NHCCI",
-    title_x=0.5,
-    xaxis_title="Date",
-    yaxis_title="NHCCI (Seasonally Adjusted)",
-    legend_title_text='',
-    xaxis_tickangle=45
-)
-
-# Major Findings # 5, Dropdown selection with highway spending vs select economic metric 
+# Major Findings # 4, Dropdown selection with highway spending vs select economic metric 
 def create_highway_econ_figure(indicator="TTLCONS"):
     fig = go.Figure()
 
@@ -270,34 +241,59 @@ layout = html.Div([
 
     html.Div([
         html.H3("Key Visualizations", style={'color': '#fbbf24', 'textAlign': 'center'}),
-
-        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_simple_cost_over_time.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+        
+        
         html.P("Figure 1: NHCCI Seasonally Adjusted Value Over Time", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("This plot reveals a noticeable acceleration in highway construction costs post-2020, suggesting inflationary pressures or increased infrastructure investments during the recovery phase after COVID-19.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+        html.P("This plot reveals a noticeable acceleration in highway construction costs post-2020, suggesting inflationary pressures or increased infrastructure investments during the recovery phase after COVID-19.", 
+               style={'textAlign': 'center', 'color': '#cbd5e0', 'marginBottom': '16px'}),
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_simple_cost_over_time.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
 
-        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_stationary_differenced.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
         html.P("Figure 2: Differenced NHCCI Series (Stationarity Confirmed)", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("Differencing the series confirmed statistical stationarity, allowing reliable SARIMA modeling by neutralizing trend and variance drift.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+        html.P("Differencing the series confirmed statistical stationarity, allowing reliable SARIMA modeling by neutralizing trend and variance drift.", 
+               style={'textAlign': 'center', 'color': '#cbd5e0', 'marginBottom': '16px'}),
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_stationary_differenced.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
 
+        html.P("Figure 3: ACF and PACF Plots to Guide Parameter Selection", style={'textAlign': 'center', 'color': '#cbd5e0', 'marginBottom': '16px'}),
+        html.P(
+            "These plots were used to identify suitable SARIMA parameters, revealing a strong autocorrelation at lag 1 and partial autocorrelation at lag 2. The ACF plot suggests that past values have a significant influence on the current value, especially at short lags, while the PACF plot helps pinpoint the exact lags with direct impact. This pattern supports including 1–2 autoregressive terms in the SARIMA model to capture the data's memory structure.",
+            style={
+                'color': '#cbd5e0',
+                'fontSize': '1rem',
+                'textAlign': 'center',
+                'maxWidth': '900px',
+                'margin': '20px auto',
+                'marginBottom': '20px'
+        }),
         html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_ACF_PACF.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
-        html.P("Figure 3: ACF and PACF Plots to Guide Parameter Selection", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("These plots were used to identify suitable SARIMA parameters, revealing a strong autocorrelation at lag 1 and partial autocorrelation at lag 2.", style={'textAlign': 'center', 'color': '#94a3b8'}),
 
-        dcc.Graph(figure=fig_forecast),
         html.P("Figure 4: Forecast vs Actual NHCCI with 95% Confidence Interval (Interactive)", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("This visualization matches the original layout using train, test, and forecasted data, including shaded bounds for confidence.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+        html.P("This SARIMA forecast shows how predicted NHCCI values align closely with actual data, with 95% confidence intervals shaded in orange. This alignment supports model accuracy, and the widening intervals indicate increasing uncertainty further into the future. This visualization helps forecast infrastructure costs and plan for volatility.", 
+               style={'textAlign': 'center', 'color': '#cbd5e0', 'marginBottom': '20px'}),
+        dcc.Graph(figure=fig_forecast),
 
-        dcc.Graph(figure=fig_residuals),
         html.P("Figure 5: Forecast Residuals – Actual vs. Predicted NHCCI (Interactive)", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("Residuals fluctuate around zero, indicating low bias. The pattern also lacks severe autocorrelation, confirming a good model fit.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+        html.P(
+            "This time series residual plot includes a horizontal reference line at zero to assess forecast bias. Residuals above zero indicate the model underpredicted actual values, while residuals below zero reflect overpredictions. The line helps track how prediction errors evolve over time and confirms that the model maintains low bias without strong autocorrelation.",
+            style={
+                'color': '#cbd5e0',
+                'fontSize': '1rem',
+                'textAlign': 'center',
+                'marginTop': '20px',
+                'maxWidth': '900px',
+                'margin': '20px auto',
+                'marginBottom': '16px'
+        }),
+        dcc.Graph(figure=fig_residuals),
 
-        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_extended_forecast.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
         html.P("Figure 6: Forecasted NHCCI Using Recent Trends", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("Show a steady increse from 2024-2027, expecting to increse to a value > 3.5 in 2027", style={'textAlign': 'center', 'color': '#94a3b8'})
+        html.P("Using only recent NHCCI data, this forecast projects a steady upward trend in construction costs. The widening confidence band reflects growing uncertainty but points to sustained inflation. This projection is crucial for budget planning and highlights the long-term financial implications of current cost momentum in the National Highway Cost Construction Index.", 
+               style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_extended_forecast.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'})
+
     ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
 
     html.Div([
-        html.H1("Major Finding #2: K-Means Investment Cluster Analysis", style={
+        html.H1("Major Finding #2: NHCCI K-Means Investment Cluster Analysis", style={
             'fontSize': '3rem',
             'color': '#38bdf8',
             'marginBottom': '20px'
@@ -328,74 +324,36 @@ layout = html.Div([
     html.Div([
         html.H3("Key Visualizations", style={'color': '#fbbf24', 'textAlign': 'center'}),
 
-        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_cluster_per_quarter_assignment.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
         html.P("Figure 1: K-Means Cluster Assignment Per Quarter", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("Each quarter was assigned to a spending cluster. High and Low Investment periods alternate based on macroeconomic signals and NHCCI changes.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+        html.P("Each quarter was assigned to a spending cluster. High and Low Investment periods alternate based on macroeconomic signals and NHCCI changes.", 
+               style={'textAlign': 'center', 'color': '#cbd5e0', 'marginBottom': '16px'}),
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_cluster_per_quarter_assignment.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
 
-        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_distribution_by_cluster_investment.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
         html.P("Figure 2: NHCCI Distribution by Investment Cluster", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("High Investment periods show higher median NHCCI values compared to Low Investment periods.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+        html.P("This boxplot compares NHCCI values across periods classified as High vs. Low Investment. High Investment periods exhibit a greater median NHCCI and wider range, suggesting increased construction activity and higher costs. The implication is that intense investment phases coincide with greater market volatility and cost escalation in highway projects.", 
+               style={'textAlign': 'center', 'color': '#cbd5e0', 'marginBottom': '20px'}),
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_distribution_by_cluster_investment.png", style={'width': '70%', 'margin': '30px auto', 'display': 'block'}),
 
-        dcc.Graph(figure=fig_segmented),
         html.P("Figure 3: NHCCI Over Time by Investment Cluster (Interactive)", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("Time series visualization highlights the duration and magnitude of investment phases.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+        html.P("This time series shows how NHCCI values evolved over time, segmented by spending clusters. Blue lines (high investment) align with upward trends in the cost index, while red (low investment) often coincide with plateaus or dips. This segmentation suggests that strategic investment decisions may drive or respond to shifts in construction cost inflation.", 
+               style={'textAlign': 'center', 'color': '#cbd5e0', 'marginBottom': '20px'}),
+        dcc.Graph(figure=fig_segmented),
 
-        dcc.Graph(figure=fig_cluster_centers),
         html.P("Figure 4: Normalized Cluster Center Comparison Across Economic Indicators (Interactive)", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("Normalization highlights key macroeconomic differences between investment phases (e.g., employment, inflation, GDP).", style={'textAlign': 'center', 'color': '#94a3b8'}),
+        html.P("This line plot compares normalized macroeconomic indicators between High and Low Investment clusters. High Investment periods correlate with higher GDP and construction employment but lower unemployment (UNRATE), implying a link between public infrastructure spending and stronger economic performance. It underscores how economic context influences spending behavior.", 
+               style={'textAlign': 'center', 'color': '#cbd5e0', 'marginBottom': '16px'}),
+        dcc.Graph(figure=fig_cluster_centers),
 
-        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_top10_component_investment_clusters.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+
         html.P("Figure 5: Top 10 Components Driving Cluster Differences", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("Asphalt and Bridge were the most influential components distinguishing between High and Low Investment clusters.", style={'textAlign': 'center', 'color': '#94a3b8'})
-    ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
-    
-    html.Div([
-        html.H1("Major Finding #3: LassoCV Macro Regression", style={
-            'fontSize': '3rem',
-            'color': '#38bdf8',
-            'marginBottom': '20px'
-        }),
-        html.P("We applied a LassoCV model to determine which macroeconomic indicators most accurately predicted NHCCI trends. The model confirmed that a sparse subset of features, notably lagged PPI and personal consumption, capture key cost movement signals. The model achieved a high Test R² of 0.87.", style={'fontSize': '1.3rem', 'color': '#cbd5e0'}),
-        html.P("Model Summary:", style={'fontSize': '1.2rem', 'color': '#fbbf24', 'marginTop': '20px'}),
-        html.Ul([
-            html.Li("LassoCV performed variable selection among economic indicators."),
-            html.Li("Optimal alpha: 0.00163"),
-            html.Li("Selected Features: TTLCONS_lag1, PPIACO_lag1"),
-            html.Li("Train R²: 0.94, Test R²: 0.87"),
-            html.Li("Confirms hypothesis that lagged macro variables explain NHCCI trends.")
-        ], style={
-            'color': '#e5e7eb',
-            'fontSize': '1.1rem',
-            'lineHeight': '1.8',
-            'maxWidth': '900px',
-            'margin': '20px auto'
-        })
-    ], style={
-        'background': 'linear-gradient(to right, #1e3a8a, #0f172a)',
-        'padding': '100px 20px',
-        'textAlign': 'center',
-        'boxShadow': '0 4px 20px rgba(0,0,0,0.3)'
-    }),
-
-    html.Div([
-        html.H3("Key Visualization", style={'color': '#fbbf24', 'textAlign': 'center'}),
-        
-        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_lassocv_coefficients.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
-        html.P("Figure 1: NHCCI Distribution by Investment Cluster", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("The bar chart shows the coefficients selected by the LassoCV model, highlighting the most influential macroeconomic predictors of NHCCI. PPIACO (Producer Price Index) and TTLCONS (Total Construction Spending) emerged as the only retained features, indicating their strong predictive relationship with construction costs.", style={'textAlign': 'center', 'color': '#94a3b8'}),
-      
-        dcc.Graph(figure=fig_lasso),
-        html.P("Figure 2: Actual vs Predicted NHCCI using LassoCV (Interactive)", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("Clear alignment between predicted and actual NHCCI confirms model’s generalization and explanatory power.", style={'textAlign': 'center', 'color': '#94a3b8'}),
-        
-        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_lassoCV_heatmap_corr.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
-        html.P("Figure 3: NHCCI Distribution by Investment Cluster", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("The heatmap displays the correlation between the selected predictors and NHCCI. Both PPIACO_lag1 and TTLCONS_lag1 exhibit high positive correlations (0.92 and 0.90 respectively) with NHCCI, supporting their inclusion in the model and reinforcing the strength of their linear association with highway construction costs.", style={'textAlign': 'center', 'color': '#94a3b8'})
+        html.P("Asphalt and Bridge were the most influential components distinguishing between High and Low Investment clusters.", 
+               style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/NHCCI_Plots/nhcci_top10_component_investment_clusters.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
 
     ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
-    
+        
     html.Div([
-        html.H1("Major Finding #4: Regression on GMM Results", style={
+        html.H1("Major Finding #3: Regression on GMM Results", style={
             'fontSize': '3rem',
             'color': '#38bdf8',
             'marginBottom': '20px'
@@ -416,13 +374,13 @@ layout = html.Div([
 
     ], style={
         'background': 'linear-gradient(to right, #0f172a, #1e3a8a)',
-        'padding': '100px 20px',
+        'padding': '60px 20px',
         'textAlign': 'center',
-        'boxShadow': '0 4px 20px rgba(0,0,0,0.3)'
+        'boxShadow': '0 4px 20px rgba(0,0,0,0.3)',
     }),
         
     html.Div([
-        html.H1("Major Finding #5: Transportation Infrastructure Spending Time-Series Trends", style={
+        html.H1("Major Finding #4: TPFS - Transportation Infrastructure Spending Time-Series Trends", style={
             'fontSize': '3rem',
             'color': '#38bdf8',
             'marginBottom': '20px'
@@ -442,7 +400,7 @@ layout = html.Div([
             'margin': '20px auto'
         })
     ], style={
-        'background': 'linear-gradient(to right, #1e3a8a, #0f172a)',
+        'background': 'linear-gradient(to right, #0f172a, #1e3a8a)',
         'padding': '100px 20px',
         'textAlign': 'center',
         'boxShadow': '0 4px 20px rgba(0,0,0,0.3)'
@@ -450,27 +408,10 @@ layout = html.Div([
 
     html.Div([
         html.H3("Key Visualizations", style={'color': '#fbbf24', 'textAlign': 'center'}),
-    
-        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/TPFS_Plots/TPFS_time_series_decomp_fed.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
-        html.P("Figure 1: Time Series Decomposition - Federal Transportation Infrastructure Spending", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("Decomposition reveals that federal spending trends upward post-2020 without notable seasonality.", style={'textAlign': 'center', 'color': '#94a3b8'}),
-
-        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/TPFS_Plots/TPFS_time_series_decomp_statelocal.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
-        html.P("Figure 2: Time Series Decomposition - State and Local Transportation Spending", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("State and local spending followed a gradual rise until 2020, before slight declines due to COVID-related budgetary constraints.", style={'textAlign': 'center', 'color': '#94a3b8'}),
-
-        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/TPFS_Plots/TPFS_time_series_decomp_total.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
-        html.P("Figure 3: Time Series Decomposition - Total Transportation Infrastructure Spending", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("Total spending remained stable with noticeable boosts during federal stimulus periods.", style={'textAlign': 'center', 'color': '#94a3b8'}),
-
-        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/TPFS_Plots/TPFS_time_series_GDP_spending.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
-        html.P("Figure 4: Cross-Correlation of Spending Leading GDP", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("Spending leads GDP growth, with strongest positive correlation observed at a 2-year lag.", style={'textAlign': 'center', 'color': '#94a3b8'}),
         
-        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/TPFS_Plots/TPFS_time_series_PPI_spending.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
-        html.P("Figure 5: Cross-Correlation of Spending Leading PPI", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("Spending peaks lead PPI inflation by about 2 years, emphasizing infrastructure investment’s influence on construction-related inflation trends.", style={'textAlign': 'center', 'color': '#94a3b8'}),
-
+        html.P("Figure 1: Transportation Spending vs Selected Economic Metric (Interactive)", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("User can select an economic indicator (GDP, PPI, or Total Construction) to visualize its relationship with highway spending over time.", 
+               style={'textAlign': 'center', 'color': '#cbd5e0'}),
         dcc.Dropdown(
             id="indicator_dropdown",
             options=[
@@ -482,8 +423,26 @@ layout = html.Div([
             style={'width': '60%', 'margin': '20px auto'}
         ),
         dcc.Graph(id="highway_econ_graph"),
-        html.P("Figure 6: Transportation Spending vs Selected Economic Metric (Interactive)", style={'textAlign': 'center', 'color': '#cbd5e0'}),
-        html.P("User can select an economic indicator (GDP, PPI, or Total Construction) to visualize its relationship with highway spending over time.", style={'textAlign': 'center', 'color': '#94a3b8'}),
+    
+        html.P("Figure 2: Time Series Decomposition - Federal Transportation Infrastructure Spending", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("Decomposition reveals that federal spending trends upward post-2020 without notable seasonality.", 
+               style={'textAlign': 'center', 'color': '#cbd5e0', 'marginBottom': '16px'}),
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/TPFS_Plots/TPFS_time_series_decomp_fed.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+
+        html.P("Figure 3: Time Series Decomposition - State and Local Transportation Spending", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("State and local spending followed a gradual rise until 2020, before slight declines due to COVID-related budgetary constraints.", 
+               style={'textAlign': 'center', 'color': '#cbd5e0', 'marginBottom': '16px'}),
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/TPFS_Plots/TPFS_time_series_decomp_statelocal.png", style={'width': '90%', 'margin': '30px auto', 'display': 'block'}),
+
+        html.P("Figure 4: Cross-Correlation of Spending Leading GDP", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("This plot reveals that transportation infrastructure spending is positively correlated with GDP growth, particularly at a 2-year lag. It suggests that public investment stimulates economic output over time lagged periods.", 
+               style={'textAlign': 'center', 'color': '#cbd5e0', 'marginBottom': '16px'}),
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/TPFS_Plots/TPFS_time_series_GDP_spending.png", style={'width': '80%', 'margin': '30px auto', 'display': 'block'}),
+
+        html.P("Figure 5: Cross-Correlation of Spending Leading PPI", style={'textAlign': 'center', 'color': '#cbd5e0'}),
+        html.P("This cross-correlation plot shows a peak at lag 2, indicating that increases in transportation infrastructure spending precede rises in the Producer Price Index (PPI) by roughly two years. This suggests that public investment has a delayed but measurable inflationary effect on construction materials/services/etc.", 
+               style={'textAlign': 'center', 'color': '#cbd5e0', 'marginBottom': '16px'}),
+        html.Img(src="https://storage.googleapis.com/databucket_seniorproj/TPFS_Plots/TPFS_time_series_PPI_spending.png", style={'width': '80%', 'margin': '30px auto', 'display': 'block'}),
 
     ], style={'padding': '60px 20px', 'backgroundColor': '#1f2937'}),
 ])

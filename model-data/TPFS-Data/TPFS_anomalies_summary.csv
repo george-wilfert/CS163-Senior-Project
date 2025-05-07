@@ -1,0 +1,98 @@
+year,mode,gov_level,anomaly_count
+2010,Highways,Federal,5
+2019,Highways,State and Local,5
+2020,Highways,State and Local,5
+2021,Highways,Federal,5
+2015,Highways,State and Local,5
+2011,Highways,Federal,4
+2017,Transit,State and Local,4
+2016,Air,Federal,4
+2011,Transit,State and Local,3
+2015,Transit,State and Local,3
+2016,Transit,State and Local,3
+2011,Highways,State and Local,3
+2010,Highways,State and Local,3
+2022,Transit,Federal,3
+2022,Transit,State and Local,3
+2021,Air,Federal,3
+2018,Highways,State and Local,3
+2015,Air,Federal,3
+2018,General,Federal,3
+2016,Highways,State and Local,3
+2019,Water,Federal,3
+2022,Highways,State and Local,3
+2014,Highways,Federal,2
+2010,General,Federal,2
+2010,Transit,State and Local,2
+2013,Transit,State and Local,2
+2013,Water,Federal,2
+2014,Air,Federal,2
+2014,General,Federal,2
+2013,Highways,Federal,2
+2013,Highways,State and Local,2
+2012,Transit,State and Local,2
+2010,Pipeline,Federal,2
+2021,Railroads,Amtrak,2
+2020,Water,Federal,2
+2020,Transit,State and Local,2
+2020,Air,Federal,2
+2019,Transit,State and Local,2
+2021,Transit,Federal,2
+2021,Highways,State and Local,2
+2020,Transit,Federal,2
+2019,Air,State and Local,2
+2017,Air,Federal,2
+2016,Highways,Federal,2
+2018,Transit,State and Local,2
+2021,Water,Federal,2
+2021,Railroads,Federal,2
+2014,Highways,State and Local,2
+2014,Transit,State and Local,2
+2012,Highways,State and Local,2
+2022,Air,Federal,2
+2022,Highways,Federal,2
+2012,Pipeline,State and Local,1
+2012,Railroads,Federal,1
+2011,Water,Federal,1
+2013,Air,Federal,1
+2013,Railroads,Federal,1
+2011,Air,Federal,1
+2010,Water,State and Local,1
+2010,Railroads,Amtrak,1
+2011,Pipeline,Federal,1
+2011,Railroads,Amtrak,1
+2010,Air,Federal,1
+2012,Air,Federal,1
+2012,Highways,Federal,1
+2014,Water,Federal,1
+2018,Pipeline,Federal,1
+2018,Air,Federal,1
+2018,Air,State and Local,1
+2018,Water,Federal,1
+2017,Railroads,Amtrak,1
+2017,Railroads,Federal,1
+2017,Railroads,State and Local,1
+2017,General,Federal,1
+2017,Highways,State and Local,1
+2017,Pipeline,Federal,1
+2016,Pipeline,Federal,1
+2016,Pipeline,State and Local,1
+2016,Railroads,Federal,1
+2016,Railroads,State and Local,1
+2016,Transit,Federal,1
+2015,Railroads,Amtrak,1
+2014,Water,State and Local,1
+2015,Water,Federal,1
+2016,Air,State and Local,1
+2017,Water,Federal,1
+2019,Water,State and Local,1
+2020,Air,State and Local,1
+2019,Air,Federal,1
+2020,Railroads,Federal,1
+2020,Highways,Federal,1
+2020,Pipeline,Federal,1
+2020,Railroads,Amtrak,1
+2021,Transit,State and Local,1
+2021,Pipeline,Federal,1
+2022,Air,State and Local,1
+2022,Water,Federal,1

@@ -1,0 +1,185 @@
+cash_flow,own_supporting,user_other,trust_fund,exp_type,gov_level,desccription,year,value,mode,chained_value,estimate_actual,deflator,gov_level_sort_order,mode_sort_order,user_other_grp,anomaly
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,General funds used for OST nonmodal outlays,2010,190000000,General,211685013.0,Actual,89.756,0,6,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,General funds used for OST nonmodal outlays,2018,241000000,General,234060118.0,Actual,102.965,0,6,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,General funds used for TSA ground transportation outlays,2014,71000000,General,73806875.0,Actual,96.197,0,6,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,General funds used for TSA ground transportation outlays,2018,282000000,General,273879474.0,Actual,102.965,0,6,Other,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,Federal,OST nonmodal outlays,2010,190000000,General,211685013.0,Actual,89.756,0,6,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,Federal,OST nonmodal outlays,2018,241000000,General,234060118.0,Actual,102.965,0,6,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,Federal,TSA ground transportation non-capital outlays,2014,71000000,General,73806875.0,Actual,96.197,0,6,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,Federal,TSA ground transportation capital outlays,2017,3000000,General,3000000.0,Actual,100.0,0,6,-,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,Non-HTF transfers to S&L from FHWA (General Fund Grants),2010,12795100000,Highways,14255425821.0,Actual,89.756,0,0,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,Non-HTF transfers to S&L from FHWA (General Fund Grants),2011,8703800000,Highways,9441051730.0,Actual,92.191,0,0,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,"General funds used for highways, administered by other agencies",2021,6828700000,Highways,6305006186.0,Actual,108.306,0,0,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,State and Local,Other state funds,2019,19216420000,Highways,18061563622.0,Actual,106.394,1,0,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,State and Local,Other state funds,2020,21122650000,Highways,19765732466.0,Actual,106.865,1,0,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,State and Local,Other state funds,2021,20702327000,Highways,17670283120.0,Actual,117.159,1,0,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,State and Local,Other state funds,2022,22448163000,Highways,17344935946.0,Actual,129.422,1,0,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,State and Local,Local general funds,2011,31434441000,Highways,34541064325.0,Actual,91.006,1,0,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,State and Local,Local general funds,2013,37490132000,Highways,38547489641.0,Actual,97.257,1,0,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,State and Local,Local general funds,2014,39216120000,Highways,39841228881.0,Actual,98.431,1,0,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,State and Local,Local general funds,2015,18324461000,Highways,18835273621.0,Actual,97.288,1,0,Other,-1
+Transfer,-,-,Non-Trust Fund,-,Federal,Non-HTF transfers to S&L from FHWA (General Fund Grants),2010,12795100000,Highways,14255425821.0,Actual,89.756,0,0,-,-1
+Transfer,-,-,Non-Trust Fund,-,Federal,Non-HTF transfers to S&L from FHWA (General Fund Grants),2011,8703800000,Highways,9441051730.0,Actual,92.191,0,0,-,-1
+Transfer,-,-,Non-Trust Fund,-,Federal,Non-HTF transfers to S&L from other agencies,2021,6402000000,Highways,5911029860.0,Actual,108.306,0,0,-,-1
+Revenue,Own-Source,User-Based,Non-Trust Fund,-,State and Local,State motor fuel taxes used for highways,2010,30272220000,Highways,34860567954.0,Actual,86.838,1,0,User-Based,-1
+Revenue,Own-Source,User-Based,Non-Trust Fund,-,State and Local,State motor fuel taxes used for highways,2011,33375153000,Highways,36673574270.0,Actual,91.006,1,0,User-Based,-1
+Revenue,Own-Source,User-Based,Non-Trust Fund,-,State and Local,State motor fuel taxes used for highways,2012,32844700000,Highways,34595582427.0,Actual,94.939,1,0,User-Based,-1
+Revenue,Own-Source,User-Based,Non-Trust Fund,-,State and Local,State motor fuel taxes used for highways,2015,33684172000,Highways,34623151879.0,Actual,97.288,1,0,User-Based,-1
+Revenue,Own-Source,User-Based,Non-Trust Fund,-,State and Local,State motor fuel taxes used for highways,2016,33476491000,Highways,34481630530.0,Actual,97.085,1,0,User-Based,-1
+Revenue,Own-Source,User-Based,Non-Trust Fund,-,State and Local,State motor fuel taxes used for highways,2018,35739157000,Highways,34116572798.0,Actual,104.756,1,0,User-Based,-1
+Revenue,Own-Source,User-Based,Non-Trust Fund,-,State and Local,State motor fuel taxes used for highways,2019,39292621000,Highways,36931237664.0,Actual,106.394,1,0,User-Based,-1
+Revenue,Own-Source,User-Based,Non-Trust Fund,-,State and Local,State motor fuel taxes used for highways,2020,39288746000,Highways,36764839751.0,Actual,106.865,1,0,User-Based,-1
+Revenue,Own-Source,User-Based,Non-Trust Fund,-,State and Local,State motor fuel taxes used for highways,2022,41270640000,Highways,31888427006.0,Actual,129.422,1,0,User-Based,-1
+Revenue,Own-Source,User-Based,Non-Trust Fund,-,State and Local,State motor vehicle taxes used for highways,2019,32182168000,Highways,30248104216.0,Actual,106.394,1,0,User-Based,-1
+Revenue,Own-Source,User-Based,Non-Trust Fund,-,State and Local,State toll revenues used for highways,2019,19904441000,Highways,18708236367.0,Actual,106.394,1,0,User-Based,-1
+Revenue,Own-Source,User-Based-Transit,Non-Trust Fund,-,State and Local,State toll revenues used for transit,2020,6994000,Highways,6544706.0,Actual,106.865,1,0,User-Based,-1
+Revenue,Own-Source,User-Based-Transit,Non-Trust Fund,-,State and Local,Local toll revenue used for transit,2015,53370000,Highways,54857742.0,Actual,97.288,1,0,User-Based,-1
+Revenue,Own-Source,User-Based-Transit,Non-Trust Fund,-,State and Local,Local toll revenue used for transit,2016,74861000,Highways,77108719.0,Actual,97.085,1,0,User-Based,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,State capital expenditures,2010,72571581000,Highways,83571225731.0,Actual,86.838,1,0,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,State capital expenditures,2011,73002308000,Highways,80217027449.0,Actual,91.006,1,0,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,State capital expenditures,2012,76017369000,Highways,80069696331.0,Actual,94.939,1,0,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,State capital expenditures,2013,74412266000,Highways,76510961679.0,Actual,97.257,1,0,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,State capital expenditures,2014,80501275000,Highways,81784473387.0,Actual,98.431,1,0,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,State capital expenditures,2015,81354908000,Highways,83622757175.0,Actual,97.288,1,0,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,State capital expenditures,2016,77999851000,Highways,80341814904.0,Actual,97.085,1,0,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,State capital expenditures,2017,78061604000,Highways,78061604000.0,Actual,100.0,1,0,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,State capital expenditures,2018,83585920000,Highways,79791057314.0,Actual,104.756,1,0,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,State capital expenditures,2019,85329888000,Highways,80201785815.0,Actual,106.394,1,0,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,State capital expenditures,2020,92050828000,Highways,86137489356.0,Actual,106.865,1,0,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,State capital expenditures,2021,90345304000,Highways,77113413395.0,Actual,117.159,1,0,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,State capital expenditures,2022,89530830000,Highways,69177442784.0,Actual,129.422,1,0,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,Local capital expenditures,2010,26584554000,Highways,30613963933.0,Actual,86.838,1,0,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,Local capital expenditures,2015,31268767000,Highways,32140415056.0,Actual,97.288,1,0,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,Local capital expenditures,2018,35178060000,Highways,33580950017.0,Actual,104.756,1,0,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,Local capital expenditures,2020,38546545000,Highways,36070317691.0,Actual,106.865,1,0,-,-1
+Revenue,Supporting,Other,Trust Fund,-,Federal,HTF receipts from federal general and other fund liquidity transfers,2010,14700000000,Highways,16377735193.0,Actual,89.756,0,0,Other,-1
+Revenue,Supporting,Other,Trust Fund,-,Federal,HTF receipts from federal general and other fund liquidity transfers,2014,18416200000,Highways,19144256058.0,Actual,96.197,0,0,Other,-1
+Revenue,Supporting,Other,Trust Fund,-,Federal,HTF receipts from federal general and other fund liquidity transfers,2016,52000000000,Highways,53063390342.0,Actual,97.996,0,0,Other,-1
+Revenue,Supporting,Other,Trust Fund,-,Federal,HTF receipts from federal general and other fund liquidity transfers,2021,10400000000,Highways,9602422765.0,Actual,108.306,0,0,Other,-1
+Revenue,Supporting,Other,Trust Fund,-,Federal,HTF receipts from federal general and other fund liquidity transfers,2022,90000000000,Highways,79025700914.0,Actual,113.887,0,0,Other,-1
+Transfer,-,-,Trust Fund,-,Federal,HTF transfers to S&L from FHWA (Trust Fund Grants),2010,29060705296,Highways,32377451420.0,Actual,89.756,0,0,-,-1
+Transfer,-,-,Trust Fund,-,Federal,HTF transfers to S&L from FHWA (Trust Fund Grants),2011,31954539784,Highways,34661235678.0,Actual,92.191,0,0,-,-1
+Transfer,-,-,Trust Fund,-,Federal,HTF transfers to S&L from FHWA (Trust Fund Grants),2013,38571574308,Highways,40879638709.0,Actual,94.354,0,0,-,-1
+Transfer,-,-,Trust Fund,-,Federal,HTF transfers to S&L from FHWA (Trust Fund Grants),2016,37829077419,Highways,38602675027.0,Actual,97.996,0,0,-,-1
+Transfer,-,-,Trust Fund,-,Federal,HTF transfers to S&L from FHWA (Trust Fund Grants),2020,45395994325,Highways,43204654260.0,Actual,105.072,0,0,-,-1
+Transfer,-,-,Trust Fund,-,Federal,HTF transfers to S&L from FHWA (Trust Fund Grants),2021,42606054650,Highways,39338591259.0,Actual,108.306,0,0,-,-1
+Transfer,-,-,Trust Fund,-,Federal,HTF transfers to S&L from FHWA (Trust Fund Grants),2022,43338597166,Highways,38054033530.0,Actual,113.887,0,0,-,-1
+Revenue,Own-Source,User-Based,Trust Fund,-,Federal,"HTF HA excise taxes, excluding transfers which approximate revenues derived from users of other modes (air, boat, etc.)",2010,30149877480,Highways,33590932617.0,Actual,89.756,0,0,User-Based,-1
+Revenue,Own-Source,User-Based,Trust Fund,-,Federal,"HTF HA excise taxes, excluding transfers which approximate revenues derived from users of other modes (air, boat, etc.)",2011,31960681799,Highways,34667897950.0,Actual,92.191,0,0,User-Based,-1
+Revenue,Own-Source,User-Based,Trust Fund,-,Federal,"HTF HA excise taxes, excluding transfers which approximate revenues derived from users of other modes (air, boat, etc.)",2012,35142865213,Highways,37810794902.0,Actual,92.944,0,0,User-Based,-1
+Revenue,Own-Source,User-Based,Trust Fund,-,Federal,"HTF HA excise taxes, excluding transfers which approximate revenues derived from users of other modes (air, boat, etc.)",2013,31800259125,Highways,33703138314.0,Actual,94.354,0,0,User-Based,-1
+Revenue,Own-Source,User-Based,Trust Fund,-,Federal,"HTF HA excise taxes, excluding transfers which approximate revenues derived from users of other modes (air, boat, etc.)",2014,34066103936,Highways,35412854804.0,Actual,96.197,0,0,User-Based,-1
+Revenue,Own-Source,User-Based,Trust Fund,-,Federal,"HTF HA excise taxes, excluding transfers which approximate revenues derived from users of other modes (air, boat, etc.)",2021,37932763186,Highways,35023695073.0,Actual,108.306,0,0,User-Based,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,"Federal  funds transferred to S&L, excluding HTF amounts",2020,15286166750,Transit,14548278086.0,Actual,105.072,0,1,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,"Federal  funds transferred to S&L, excluding HTF amounts",2021,16258644412,Transit,15011767041.0,Actual,108.306,0,1,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,"Federal  funds transferred to S&L, excluding HTF amounts",2022,26825512438,Transit,23554499142.0,Actual,113.887,0,1,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,State and Local,State transportation funds,2011,5306793209,Transit,5831256411.0,Actual,91.006,1,1,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,State and Local,State transportation funds,2017,2551340245,Transit,2551340245.0,Actual,100.0,1,1,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,State and Local,Other Local funds,2014,6622578271,Transit,6728142832.0,Actual,98.431,1,1,Other,-1
+Revenue,Own-Source,Other,Non-Trust Fund,-,State and Local,Agency other tax revenues,2015,2988131202,Transit,3071428339.0,Actual,97.288,1,1,Other,-1
+Revenue,Own-Source,Other,Non-Trust Fund,-,State and Local,Agency other tax revenues,2016,4161616177,Transit,4286569683.0,Actual,97.085,1,1,Other,-1
+Revenue,Own-Source,Other,Non-Trust Fund,-,State and Local,Agency other tax revenues,2017,4173892709,Transit,4173892709.0,Actual,100.0,1,1,Other,-1
+Transfer,-,-,Non-Trust Fund,-,Federal,"Federal  funds transferred to S&L, excluding HTF amounts",2020,15286166750,Transit,14548278086.0,Actual,105.072,0,1,-,-1
+Transfer,-,-,Non-Trust Fund,-,Federal,"Federal  funds transferred to S&L, excluding HTF amounts",2021,16258644412,Transit,15011767041.0,Actual,108.306,0,1,-,-1
+Transfer,-,-,Non-Trust Fund,-,Federal,"Federal  funds transferred to S&L, excluding HTF amounts",2022,26825512438,Transit,23554499142.0,Actual,113.887,0,1,-,-1
+Revenue,Own-Source,User-Based,Non-Trust Fund,-,State and Local,Agency passenger fares,2022,8682881447,Transit,6708968682.0,Actual,129.422,1,1,User-Based,-1
+Revenue,Own-Source,User-Based,Non-Trust Fund,-,State and Local,Other agency user-based revenue,2018,3306069854,Transit,3155971834.0,Actual,104.756,1,1,User-Based,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,State and Local,Agency non-capital Expenditure,2010,37730149794,Transit,43448893104.0,Actual,86.838,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,State and Local,Agency non-capital Expenditure,2011,38603509268,Transit,42418641923.0,Actual,91.006,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,State and Local,Agency non-capital Expenditure,2012,40261956384,Transit,42408237272.0,Actual,94.939,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,State and Local,Agency non-capital Expenditure,2013,42762607571,Transit,43968668138.0,Actual,97.257,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,State and Local,Agency non-capital Expenditure,2014,42054002435,Transit,42724347446.0,Actual,98.431,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,State and Local,Agency non-capital Expenditure,2015,44398117126,Transit,45635758908.0,Actual,97.288,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,State and Local,Agency non-capital Expenditure,2016,46428071933,Transit,47822085732.0,Actual,97.085,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,State and Local,Agency non-capital Expenditure,2017,46529260787,Transit,46529260787.0,Actual,100.0,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,State and Local,Agency non-capital Expenditure,2018,48431217690,Transit,46232404531.0,Actual,104.756,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,State and Local,Agency non-capital Expenditure,2019,50733977187,Transit,47684998390.0,Actual,106.394,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,State and Local,Agency non-capital Expenditure,2020,49660152320,Transit,46469987667.0,Actual,106.865,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,State and Local,Agency non-capital Expenditure,2021,49706061866,Transit,42426157500.0,Actual,117.159,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,State and Local,Agency non-capital Expenditure,2022,53696418450,Transit,41489405549.0,Actual,129.422,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,Agency capital Expenditure,2010,16564299059,Transit,19074943065.0,Actual,86.838,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,Agency capital Expenditure,2011,15716345559,Transit,17269570752.0,Actual,91.006,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,Agency capital Expenditure,2012,16918812957,Transit,17820719575.0,Actual,94.939,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,Agency capital Expenditure,2013,17254189819,Transit,17740820526.0,Actual,97.257,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,Agency capital Expenditure,2015,19529846613,Transit,20074260559.0,Actual,97.288,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,Agency capital Expenditure,2016,19713315173,Transit,20305212106.0,Actual,97.085,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,Agency capital Expenditure,2017,19936823922,Transit,19936823922.0,Actual,100.0,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,Agency capital Expenditure,2019,24411905322,Transit,22944813920.0,Actual,106.394,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,Agency capital Expenditure,2020,23527873466,Transit,22016444548.0,Actual,106.865,1,1,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,Agency capital Expenditure,2022,26785679812,Transit,20696388413.0,Actual,129.422,1,1,-,-1
+Revenue,Supporting,Other,Trust Fund,-,Federal,"HTF MTA receipts, including general fund transfers",2016,23293614139,Transit,23769964222.0,Actual,97.996,0,1,Other,-1
+Revenue,Supporting,Other,Trust Fund,-,Federal,"HTF MTA receipts, including general fund transfers",2022,33998019511,Transit,29852414684.0,Actual,113.887,0,1,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,FAA general fund nongrant outlays,2015,1131000000,Air,1165510774.0,Actual,97.039,0,2,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,FAA general fund nongrant outlays,2016,1764000000,Air,1800073472.0,Actual,97.996,0,2,Other,-1
+Revenue,Own-Source,Other,Non-Trust Fund,-,State and Local,"Non-user-based revenues: Land and non-terminal facility leases, hotel, and other revenues, plus interest income",2019,3595048861,Air,3378995865.0,Actual,106.394,1,2,Other,-1
+Revenue,Own-Source,Other,Non-Trust Fund,-,State and Local,"Non-user-based revenues: Land and non-terminal facility leases, hotel, and other revenues, plus interest income",2020,3067999666,Air,2870911586.0,Actual,106.865,1,2,Other,-1
+Revenue,Own-Source,Other,Non-Trust Fund,-,State and Local,"Non-user-based revenues: Land and non-terminal facility leases, hotel, and other revenues, plus interest income",2022,1989703017,Air,1537376193.0,Actual,129.422,1,2,Other,-1
+Revenue,Own-Source,User-Based,Non-Trust Fund,-,State and Local,"User-based revenues: total aeronautical revenue, certain non-aeronautical revenues, and PFCs",2016,22314431969,Air,22984428047.0,Actual,97.085,1,2,User-Based,-1
+Revenue,Own-Source,User-Based,Non-Trust Fund,-,State and Local,"User-based revenues: total aeronautical revenue, certain non-aeronautical revenues, and PFCs",2018,24772293830,Air,23647613340.0,Actual,104.756,1,2,User-Based,-1
+Revenue,Own-Source,User-Based,Non-Trust Fund,-,State and Local,"User-based revenues: total aeronautical revenue, certain non-aeronautical revenues, and PFCs",2019,26172342248,Air,24599453210.0,Actual,106.394,1,2,User-Based,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,Federal,FAA general fund nongrant outlays,2015,1131000000,Air,1165510774.0,Actual,97.039,0,2,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,Federal,FAA general fund nongrant outlays,2016,1764000000,Air,1800073472.0,Actual,97.996,0,2,-,-1
+Revenue,Supporting,Other,Trust Fund,-,Federal,General funds to AATF,2021,14032111738,Air,12955987423.0,Actual,108.306,0,2,Other,-1
+Revenue,Own-Source,User-Based,Trust Fund,-,Federal,Excise tax revenues to AATF,2010,10612953000,Air,11824226793.0,Actual,89.756,0,2,User-Based,-1
+Revenue,Own-Source,User-Based,Trust Fund,-,Federal,Excise tax revenues to AATF,2011,11531819120,Air,12508617023.0,Actual,92.191,0,2,User-Based,-1
+Revenue,Own-Source,User-Based,Trust Fund,-,Federal,Excise tax revenues to AATF,2012,12532214510,Air,13483618641.0,Actual,92.944,0,2,User-Based,-1
+Revenue,Own-Source,User-Based,Trust Fund,-,Federal,Excise tax revenues to AATF,2013,12853559795,Air,13622697284.0,Actual,94.354,0,2,User-Based,-1
+Revenue,Own-Source,User-Based,Trust Fund,-,Federal,Excise tax revenues to AATF,2014,13512514635,Air,14046711056.0,Actual,96.197,0,2,User-Based,-1
+Revenue,Own-Source,User-Based,Trust Fund,-,Federal,Excise tax revenues to AATF,2015,14268051549,Air,14703419810.0,Actual,97.039,0,2,User-Based,-1
+Revenue,Own-Source,User-Based,Trust Fund,-,Federal,Excise tax revenues to AATF,2016,14406200051,Air,14700804166.0,Actual,97.996,0,2,User-Based,-1
+Revenue,Own-Source,User-Based,Trust Fund,-,Federal,Excise tax revenues to AATF,2017,15054799004,Air,15054799004.0,Actual,100.0,0,2,User-Based,-1
+Revenue,Own-Source,User-Based,Trust Fund,-,Federal,Excise tax revenues to AATF,2018,15792523056,Air,15337758516.0,Actual,102.965,0,2,User-Based,-1
+Revenue,Own-Source,User-Based,Trust Fund,-,Federal,Excise tax revenues to AATF,2019,15975987180,Air,15259551249.0,Actual,104.695,0,2,User-Based,-1
+Revenue,Own-Source,User-Based,Trust Fund,-,Federal,Excise tax revenues to AATF,2020,9015738616,Air,8580533935.0,Actual,105.072,0,2,User-Based,-1
+Revenue,Own-Source,User-Based,Trust Fund,-,Federal,Excise tax revenues to AATF,2021,8183642217,Air,7556037724.0,Actual,108.306,0,2,User-Based,-1
+Revenue,Own-Source,User-Based,Trust Fund,-,Federal,Excise tax revenues to AATF,2022,11376625835,Air,9989398118.0,Actual,113.887,0,2,User-Based,-1
+Expenditure,-,-,Trust Fund,Non-Capital,Federal,AATF non-capital expenditure,2014,6773282940,Air,7041054232.0,Actual,96.197,0,2,-,-1
+Expenditure,-,-,Trust Fund,Non-Capital,Federal,AATF non-capital expenditure,2016,8251115411,Air,8419849189.0,Actual,97.996,0,2,-,-1
+Expenditure,-,-,Trust Fund,Non-Capital,Federal,AATF non-capital expenditure,2017,9221888915,Air,9221888915.0,Actual,100.0,0,2,-,-1
+Expenditure,-,-,Trust Fund,Non-Capital,Federal,AATF non-capital expenditure,2020,10707478705,Air,10190610919.0,Actual,105.072,0,2,-,-1
+Expenditure,-,-,Trust Fund,Non-Capital,Federal,AATF non-capital expenditure,2021,10582090099,Air,9770548353.0,Actual,108.306,0,2,-,-1
+Expenditure,-,-,Trust Fund,Non-Capital,Federal,AATF non-capital expenditure,2022,7992863106,Air,7018240103.0,Actual,113.887,0,2,-,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,General funds for FRA,2016,3765000000,Railroads,3841993551.0,Actual,97.996,0,4,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,General funds for FRA,2017,4601000000,Railroads,4601000000.0,Actual,100.0,0,4,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,General funds for FRA,2020,3344000000,Railroads,3182579564.0,Actual,105.072,0,4,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,General funds for FRA,2021,5054000000,Railroads,4666408140.0,Actual,108.306,0,4,Other,-1
+Revenue,Own-Source,Other,Non-Trust Fund,-,Amtrak,Amtrak net interest income (expense),2010,100901000,Railroads,115618017.0,Actual,87.271,3,4,Other,-1
+Revenue,Own-Source,Other,Non-Trust Fund,-,Amtrak,Amtrak net interest income (expense),2021,-23100000,Railroads,-19917055.0,Actual,115.981,3,4,Other,-1
+Transfer,-,-,Non-Trust Fund,-,Federal,Federal funds to Amtrak,2021,4679000000,Railroads,4320166934.0,Actual,108.306,0,4,-,-1
+Transfer,-,-,Non-Trust Fund,-,Federal,Federal grants to state and local entities,2012,536000000,Railroads,576691341.0,Actual,92.944,0,4,-,-1
+Transfer,-,-,Non-Trust Fund,-,Federal,Federal grants to state and local entities,2013,787000000,Railroads,834092884.0,Actual,94.354,0,4,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,Amtrak,Amtrak operating expenditures,2011,3504569000,Railroads,3842771302.0,Actual,91.199,3,4,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,Amtrak,Amtrak operating expenditures,2015,3724200000,Railroads,3829314688.0,Actual,97.255,3,4,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,Amtrak,Amtrak operating expenditures,2017,3589200000,Railroads,3589200000.0,Actual,100.0,3,4,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,Amtrak,Amtrak operating expenditures,2020,3373200000,Railroads,3163581115.0,Actual,106.626,3,4,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,Amtrak,Amtrak operating expenditures,2021,3295200000,Railroads,2841155017.0,Actual,115.981,3,4,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,State and local expenditures of federal grants,2016,2109000000,Railroads,2172323222.0,Actual,97.085,1,4,-,-1
+Expenditure,-,-,Non-Trust Fund,Capital,State and Local,State and local expenditures of federal grants,2017,2582000000,Railroads,2582000000.0,Actual,100.0,1,4,-,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,Prorated share of Army Corps non-capital expenditure attributable to Commercial Navigation activities,2019,712800000,Water,680834806.0,Actual,104.695,0,3,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,"Maritime Administration, US Coast Guard, Federal Maritime Commission general fund outlays",2011,10410000000,Water,11291774685.0,Actual,92.191,0,3,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,"Maritime Administration, US Coast Guard, Federal Maritime Commission general fund outlays",2020,11255000000,Water,10711702452.0,Actual,105.072,0,3,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,"Maritime Administration, US Coast Guard, Federal Maritime Commission general fund outlays",2021,12354000000,Water,11406570273.0,Actual,108.306,0,3,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,"Maritime Administration, US Coast Guard, Federal Maritime Commission general fund outlays",2022,12316000000,Water,10814228138.0,Actual,113.887,0,3,Other,-1
+Revenue,Own-Source,User-Based,Non-Trust Fund,-,State and Local,State and local revenues from sea and inland port activities,2010,3880871000,Water,4469093024.0,Actual,86.838,1,3,User-Based,-1
+Revenue,Own-Source,User-Based,Non-Trust Fund,-,State and Local,State and local revenues from sea and inland port activities,2014,4829594000,Water,4906578212.0,Actual,98.431,1,3,User-Based,-1
+Revenue,Own-Source,User-Based,Non-Trust Fund,-,State and Local,State and local revenues from sea and inland port activities,2019,6476715000,Water,6087481437.0,Actual,106.394,1,3,User-Based,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,Federal,"Maritime Administration, US Coast Guard, Federal Maritime Commission general fund outlays for non-capital",2013,8374000000,Water,8875087437.0,Actual,94.354,0,3,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,Federal,"Maritime Administration, US Coast Guard, Federal Maritime Commission general fund outlays for non-capital",2014,8221000000,Water,8546004553.0,Actual,96.197,0,3,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,Federal,"Maritime Administration, US Coast Guard, Federal Maritime Commission general fund outlays for non-capital",2015,8461000000,Water,8719174765.0,Actual,97.039,0,3,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,Federal,"Maritime Administration, US Coast Guard, Federal Maritime Commission general fund outlays for non-capital",2017,8601000000,Water,8601000000.0,Actual,100.0,0,3,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,Federal,"Maritime Administration, US Coast Guard, Federal Maritime Commission general fund outlays for non-capital",2018,8791000000,Water,8537852668.0,Actual,102.965,0,3,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,Federal,"Maritime Administration, US Coast Guard, Federal Maritime Commission general fund outlays for non-capital",2020,9741000000,Water,9270785747.0,Actual,105.072,0,3,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,Federal,"Maritime Administration, US Coast Guard, Federal Maritime Commission general fund outlays for non-capital",2021,10596000000,Water,9783391502.0,Actual,108.306,0,3,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,Federal,Prorated share of Army Corps non-capital expenditure attributable to Commercial Navigation activities,2019,712800000,Water,680834806.0,Actual,104.695,0,3,-,-1
+Revenue,Own-Source,User-Based,Trust Fund,-,Federal,Harbor Maintenance Trust Fund receipts,2013,1696017772,Water,1797504899.0,Actual,94.354,0,3,User-Based,-1
+Expenditure,-,-,Trust Fund,Capital,Federal,Inland Waterways Trust Funded Army Corps expenditure,2019,183217537,Water,175001229.0,Actual,104.695,0,3,-,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,Non-Trust Funded portion of PHMSA operations and grants,2016,238000000,Pipeline,242867056.0,Actual,97.996,0,5,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,Non-Trust Funded portion of PHMSA operations and grants,2017,226000000,Pipeline,226000000.0,Actual,100.0,0,5,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,Non-Trust Funded portion of PHMSA operations and grants,2018,219000000,Pipeline,212693634.0,Actual,102.965,0,5,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,Non-Trust Funded portion of PHMSA operations and grants,2020,255000000,Pipeline,242690726.0,Actual,105.072,0,5,Other,-1
+Revenue,Supporting,Other,Non-Trust Fund,-,Federal,Non-Trust Funded portion of PHMSA operations and grants,2021,244000000,Pipeline,225287611.0,Actual,108.306,0,5,Other,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,Federal,Non-Trust Funded portion of PHMSA operations,2011,136000000,Pipeline,147519823.0,Actual,92.191,0,5,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,State and Local,S&L expenditure of federal grants,2012,30000000,Pipeline,31599237.0,Actual,94.939,1,5,-,-1
+Expenditure,-,-,Non-Trust Fund,Non-Capital,State and Local,S&L expenditure of federal grants,2016,60000000,Pipeline,61801514.0,Actual,97.085,1,5,-,-1
+Transfer,-,-,Trust Fund,-,Federal,Trust funded portion of Pipeline Safety Grants,2010,0,Pipeline,0.0,Actual,89.756,0,5,-,-1
+Revenue,Own-Source,User-Based,Trust Fund,-,Federal,Trust funded transfer to PHMSA,2010,0,Pipeline,0.0,Actual,89.756,0,5,User-Based,-1

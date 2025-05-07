@@ -108,4 +108,4 @@ Raw Datasets → Data Cleaning → Feature Engineering → Modeling & Analysis �
 ## ✅ Authors
 
 - Brendan Dishion  
-- George Chao
+- George Wilfert

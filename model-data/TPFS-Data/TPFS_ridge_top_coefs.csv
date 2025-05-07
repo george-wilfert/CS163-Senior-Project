@@ -1,0 +1,14 @@
+Feature,Coefficient
+C(gov_level)[T.Federal],-2.7363151624309294
+C(gov_level)[T.State and Local],1.1138545358836998
+C(gov_level)[T.Total],1.1437197224451767
+C(mode)[T.General],-1.5498452282298205
+C(mode)[T.Highways],0.6140888124592329
+C(mode)[T.Water],0.5718273323022248
+C(gov_level)[T.Federal]:C(mode)[T.General],-1.0756663371870276
+C(gov_level)[T.Total]:C(mode)[T.General],-1.219293226817975
+C(gov_level)[T.Federal]:C(mode)[T.Highways],0.6770562621156315
+C(gov_level)[T.State and Local]:C(mode)[T.Railroads],-0.8817056815640087
+C(gov_level)[T.Total]:C(mode)[T.Railroads],-0.5135851902366134
+C(gov_level)[T.Federal]:C(mode)[T.Water],1.2653687526778827
+C(gov_level)[T.State and Local]:C(mode)[T.Water],-0.565806743090886

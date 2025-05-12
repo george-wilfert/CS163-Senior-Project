@@ -12,6 +12,7 @@ This project investigates infrastructure spending trends in the United States us
 
 - **NHCCI (National Highway Construction Cost Index)**: Measures changes in highway construction costs over time, providing a benchmark for infrastructure inflation.
 - **TPFS (Transportation Public Finance Statistics)**: Captures federal, state, and local government spending across different transportation modes like highways, transit, rail, water, and air.
+- **Energy Infastructure**: Shows relationships between state energy infastructure and systems in order to predict indicators and dive deeper into future insights
 
 By combining statistical modeling and machine learning, we aim to provide actionable insights for policy analysts, economists, and urban planners.
 

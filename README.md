@@ -76,26 +76,33 @@ Raw Datasets → Data Cleaning → Feature Engineering → Modeling & Analysis �
 ## 📁 Repository Structure
 
 ```
-.
-├── app.py                      # Main Dash application entry point
-├── pages/
-│   ├── home.py                 # Homepage content
-│   ├── objectives.py           # Project goals and dataset explanation
-│   ├── analytics_method.py     # Technical explanation of models used
-│   ├── major_findings.py       # Key results and interactive plots
-│   └── more_findings.py        # Additional insights and minor results
-├── data/
-│   ├── NHCCI/                  # NHCCI cleaned CSVs and macroeconomic join
-│   └── TPFS/                   # Public finance cleaned datasets
-├── plots/
-│   └── static_images/          # Hosted .png plot files (Google Cloud Bucket)
-├── models/
-│   ├── nhcci_sarima.py
-│   ├── nhcci_clustering.py
-│   ├── tpfs_ridge.py
-│   └── tpfs_isolation.py
-├── requirements.txt
+├── appengine/
+│   ├── __pycache__/
+│   ├── assets/
+│   ├── pages/
+│   │   ├── __pycache__/
+│   │   ├── analytics_method.py        # Explanation of models used
+│   │   ├── main.py                    # Homepage content
+│   │   ├── major_findings.py          # Key results and interactive plots
+│   │   ├── more_findings.py           # Additional insights and minor results
+│   │   └── project_objectives.py      # Project goals and dataset explanation
+│   ├── app.py                         # Main Dash application entry point
+│   ├── app.yaml                       # Config. file for deploying dash web app
+│   ├── .gcloudignore
+│   └── requirements.txt               # Required dependencies for webpage
+├── docs/
+│   └── Finalized Proposal (Group 4)
+├── model-data/                        # Data required for models 
+│   ├── NHCCI-Data/
+│   └── TPFS-Data/
+├── models/                            # Python ML models w/ data files
+│   ├── NHCCI-models/
+│   └── TPFS-models/
+├── plots/                             # Plots from models
+│   ├── NHCCI-plots/
+│   └── TPFS-plots/
 └── README.md
+
 ```
 
 ## 📈 Technologies Used

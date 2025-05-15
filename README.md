@@ -93,6 +93,9 @@ Raw Datasets → Data Cleaning → Feature Engineering → Modeling & Analysis �
 │   └── requirements.txt               # Required dependencies for webpage
 ├── docs/
 │   └── Finalized Proposal (Group 4)
+├── eda_files/
+│   ├── nhcci_eda.py
+│   └── tpfs_eda.py
 ├── model-data/                        # Data required for models 
 │   ├── NHCCI-Data/
 │   └── TPFS-Data/
